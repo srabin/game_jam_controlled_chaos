@@ -4,8 +4,8 @@ extends CharacterBody2D
 var is_dashing = false
 
 const SPEED = 800.0
-const DASH_SPEED = SPEED * 5
-const DECELERATION_RATE = SPEED * 0.04
+const DASH_SPEED = SPEED * 4
+const DECELERATION_RATE = SPEED * 0.02
 const ACCELLERATION_RATE = SPEED * 0.18
 
 
@@ -17,19 +17,16 @@ func _on_dash_length_timer_timeout() -> void:
 	#velocity.y = 0
 	
 func _process(delta: float) -> void:
-	var horizontal = Input.get_axis("move_left", "move_right")
-	var vertical = Input.get_axis("move_up", "move_down")
-	look_at(Vector2(horizontal, vertical))
+	var direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	var player_position = self.position
+	look_at(player_position + direction)
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_axis("move_left", "move_right")
 	var vertical := Input.get_axis("move_up", "move_down")
 	var dash := Input.is_action_just_pressed("dash")
 		
-	#if not is_dashing:
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
-		
-	#if not is_dashing:
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
 		
 	if dash and not is_dashing:
