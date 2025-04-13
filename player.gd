@@ -2,19 +2,21 @@ extends CharacterBody2D
 
 @onready var dash_timer = $DashTimer
 @onready var stamina_timer = $StaminaTimer
-@onready var dash_lockout_timer = $DashLockoutTimer
 
 # Player Movement
-var move_input = Vector2.ZERO
+var move_input := Vector2.ZERO
 
 const SPEED = 800.0
 const DASH_SPEED = SPEED * 1.6
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.09
+const BOUNCE_STRENGTH = 0.7	
+var inertia = 100.0
 
 # Player State
 var state: States = States.IDLE
-var stamina = 100.0
+var stamina := 100.0
+
 
 enum States {IDLE, DASHING, MOVING, HURTING, FALLING}
 
@@ -41,7 +43,7 @@ func _process(delta: float) -> void:
 	look_at(player_position + direction)
 
 	
-func _dash(horizontal, vertical, dash):	
+func _dash(horizontal, vertical, dashk, delta):	
 	#if stamina > 0.0:
 	state = States.DASHING
 	dash_timer.start()
@@ -49,10 +51,12 @@ func _dash(horizontal, vertical, dash):
 	velocity.y = vertical * DASH_SPEED
 	#self._subtract_stamina()
 
-func _move(horizontal, vertical):
+func _move(horizontal, vertical, delta):
 	state == States.MOVING
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
+	#velocity.x = horizontal * SPEED
+	#velocity.y = vertical * SPEED
 	
 	
 func _physics_process(delta: float) -> void:
@@ -61,18 +65,18 @@ func _physics_process(delta: float) -> void:
 	var dash := Input.get_action_strength("dash")
 	match state:
 		States.IDLE:
-			self._move(horizontal, vertical)
+			self._move(horizontal, vertical, delta)
 			if dash:
-				self._dash(horizontal, vertical, dash)
+				self._dash(horizontal, vertical, dash, delta)
 		States.DASHING:
 			pass
 		States.MOVING:
 			if horizontal and vertical:
-				self._move(horizontal, vertical)
+				self._move(horizontal, vertical, delta)
 			else:
 				state = States.IDLE
 			if dash:
-				self._dash(horizontal, vertical, dash)
+				self._dash(horizontal, vertical, dash, delta)
 		States.HURTING:
 			pass
 		States.FALLING:
@@ -81,5 +85,12 @@ func _physics_process(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, 0, DECELERATION_RATE)
 	velocity.y = move_toward(velocity.y, 0, DECELERATION_RATE)
 	
-
+	# save the velocity from before move_and_slide finishes to use for the bounce
+	var initial_velocity = velocity
+	
 	move_and_slide()
+	
+	# not sure why last slide... but seth said it feels better
+	var collision = get_last_slide_collision()
+	if collision:
+		velocity = initial_velocity.bounce(collision.get_normal())
