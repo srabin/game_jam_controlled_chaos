@@ -17,7 +17,9 @@ func _on_dash_length_timer_timeout() -> void:
 	#velocity.y = 0
 	
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	var horizontal = Input.get_axis("move_left", "move_right")
+	var vertical = Input.get_axis("move_up", "move_down")
+	look_at(Vector2(horizontal, vertical))
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_axis("move_left", "move_right")
