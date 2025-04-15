@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var dash_timer = $DashTimer
-@onready var stamina_timer = $StaminaTimer
 @onready var animation_player = $AnimationPlayer
 
 # Player Movement
@@ -16,29 +15,17 @@ var inertia = 100.0
 
 # Player State
 var state: States = States.IDLE
-var stamina := 100.0
 var has_attacked: bool
 var attack_speed := 2.0
 
 
 enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING}
 
-const STAMINA_DASH_COST = 25.0
-
+func take_damage(amount: int) -> void:
+	print("damage", amount)
 
 func _on_dash_timer_timeout() -> void:
 	state = States.IDLE
-	
-
-func _on_stamina_timer_timeout() -> void:
-	if stamina < 100.0:
-		stamina += 1.0
-		stamina_timer.start()
-
-		
-func _subtract_stamina() -> void:
-	stamina -= STAMINA_DASH_COST
-	stamina_timer.start()
 		
 	
 func _process(delta: float) -> void:
@@ -49,7 +36,6 @@ func _process(delta: float) -> void:
 
 	
 func _dash(horizontal, vertical, dash, delta):	
-	#if stamina > 0.0:
 	state = States.DASHING
 	dash_timer.start()
 	velocity.x = horizontal * DASH_SPEED
@@ -60,8 +46,6 @@ func _move(horizontal, vertical, delta):
 	state = States.MOVING
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
-	#velocity.x = horizontal * SPEED
-	#velocity.y = vertical * SPEED
 
 func _light_attack():
 	state = States.ATTACKING
