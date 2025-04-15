@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 @onready var dash_timer = $DashTimer
 @onready var stamina_timer = $StaminaTimer
+@onready var animation_player = $AnimationPlayer
 
 # Player Movement
 var move_input := Vector2.ZERO
 
-const SPEED = 800.0
+const SPEED = 500.0
 const DASH_SPEED = SPEED * 1.6
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.09
@@ -16,9 +17,11 @@ var inertia = 100.0
 # Player State
 var state: States = States.IDLE
 var stamina := 100.0
+var has_attacked: bool
+var attack_speed := 2.0
 
 
-enum States {IDLE, DASHING, MOVING, HURTING, FALLING}
+enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING}
 
 const STAMINA_DASH_COST = 25.0
 
@@ -31,6 +34,7 @@ func _on_stamina_timer_timeout() -> void:
 	if stamina < 100.0:
 		stamina += 1.0
 		stamina_timer.start()
+
 		
 func _subtract_stamina() -> void:
 	stamina -= STAMINA_DASH_COST
@@ -40,36 +44,52 @@ func _subtract_stamina() -> void:
 func _process(delta: float) -> void:
 	var direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	var player_position = self.position
-	look_at(player_position + direction)
+	# This needs to be rotated 90 degrees because look_at looks to the right of the sprite by default
+	look_at(player_position + direction.rotated(-1*(PI / 2)))
 
 	
-func _dash(horizontal, vertical, dashk, delta):	
+func _dash(horizontal, vertical, dash, delta):	
 	#if stamina > 0.0:
 	state = States.DASHING
 	dash_timer.start()
 	velocity.x = horizontal * DASH_SPEED
 	velocity.y = vertical * DASH_SPEED
-	#self._subtract_stamina()
+
 
 func _move(horizontal, vertical, delta):
-	state == States.MOVING
+	state = States.MOVING
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
 	#velocity.x = horizontal * SPEED
 	#velocity.y = vertical * SPEED
+
+func _light_attack():
+	state = States.ATTACKING
+	var custom_speed = attack_speed
+	animation_player.play("light_attack", -1, custom_speed)
+	animation_player.animation_finished.connect(func(_animation): has_attacked = true)
+	
+	
 	
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var vertical := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var dash := Input.get_action_strength("dash")
+	var light_attack := Input.get_action_strength("light_attack")
+
 	match state:
 		States.IDLE:
+			animation_player.play("idle")
 			self._move(horizontal, vertical, delta)
 			if dash:
 				self._dash(horizontal, vertical, dash, delta)
+			if light_attack:
+				self._light_attack()
+			
 		States.DASHING:
-			pass
+			if light_attack:
+				self._light_attack()
 		States.MOVING:
 			if horizontal and vertical:
 				self._move(horizontal, vertical, delta)
@@ -77,10 +97,16 @@ func _physics_process(delta: float) -> void:
 				state = States.IDLE
 			if dash:
 				self._dash(horizontal, vertical, dash, delta)
+			if light_attack:
+				self._light_attack()
 		States.HURTING:
 			pass
 		States.FALLING:
 			pass
+		States.ATTACKING:
+			if has_attacked:
+				state = States.IDLE
+				has_attacked = false
 	
 	velocity.x = move_toward(velocity.x, 0, DECELERATION_RATE)
 	velocity.y = move_toward(velocity.y, 0, DECELERATION_RATE)

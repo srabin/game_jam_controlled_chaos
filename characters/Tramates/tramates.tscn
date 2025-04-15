@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8o7vw8wbevi2"]
+
+[ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_p4iso"]
+[ext_resource type="Texture2D" uid="uid://cgaiklckyf6pd" path="res://characters/Tramates/Trametes Sprite Sheet.png" id="2_51wja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la2f7"]
+size = Vector2(68.5, 66)
+
+[sub_resource type="Animation" id="Animation_i3pqv"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TramatesSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_p4iso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TramatesSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_51wja"]
+resource_name = "light_attack"
+length = 0.666
+step = 0.033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TramatesSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
+_data = {
+&"RESET": SubResource("Animation_p4iso"),
+&"idle": SubResource("Animation_i3pqv"),
+&"light_attack": SubResource("Animation_51wja")
+}
+
+[node name="Tramates" type="CharacterBody2D"]
+script = ExtResource("1_p4iso")
+
+[node name="TramatesSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_51wja")
+hframes = 5
+vframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_la2f7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hqtel")
+}
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="StaminaTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.075
+one_shot = true
