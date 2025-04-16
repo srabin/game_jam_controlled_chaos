@@ -8,7 +8,7 @@ var move_input := Vector2.ZERO
 const SPEED = 500.0
 const DASH_SPEED = SPEED * 1.6
 const DECELERATION_RATE = SPEED * 0.04
-const ACCELLERATION_RATE = SPEED * 0.09
+const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
 var inertia = 100.0
 
@@ -20,14 +20,18 @@ var has_blocked: bool
 
 var attack_speed := 2.0
 var dash_speed := 2.0
-var block_speed := 2.0
+var block_speed := 0.4
+
+var percentage := 0.0
 
 
 
 enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING, BLOCKING}
 
 func take_damage(amount: int) -> void:
-	print("damage", amount)
+	if not state == States.BLOCKING:
+		percentage += amount
+		print(percentage)
 
 	
 func _process(delta: float) -> void:
@@ -59,17 +63,15 @@ func _light_attack():
 	
 func _block():
 	state = States.BLOCKING
-	animation_player.play("block", -1, has_blocked)
+	animation_player.play("block", -1, block_speed)
 	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
-	
-	
-	
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var vertical := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var dash := Input.get_action_strength("dash")
 	var light_attack := Input.get_action_strength("light_attack")
+	var block := Input.get_action_strength("block")
 
 	match state:
 		States.IDLE:
@@ -80,6 +82,8 @@ func _physics_process(delta: float) -> void:
 				self._dash(horizontal, vertical, dash, delta)
 			if light_attack:
 				self._light_attack()
+			if block:
+				self._block()
 			
 		States.DASHING:
 			if has_dashed:
@@ -87,8 +91,10 @@ func _physics_process(delta: float) -> void:
 				has_dashed = false
 			if light_attack:
 				self._light_attack()
+			if block:
+				self._block()
 		States.MOVING:
-			if horizontal and vertical:
+			if horizontal or vertical:
 				self._move(horizontal, vertical, delta)
 			else:
 				state = States.IDLE
@@ -96,6 +102,8 @@ func _physics_process(delta: float) -> void:
 				self._dash(horizontal, vertical, dash, delta)
 			if light_attack:
 				self._light_attack()
+			if block:
+				self._block()
 		States.HURTING:
 			pass
 		States.FALLING:
