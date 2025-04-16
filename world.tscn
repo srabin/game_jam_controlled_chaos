@@ -24,3 +24,7 @@ shape = SubResource("RectangleShape2D_d5x1h")
 
 [node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(557, 265)
+player_id = 1
+attack_animation_speed = 4
+dash_animation_speed = 3
+block_animation_speed = 3.0

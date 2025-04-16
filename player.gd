@@ -2,6 +2,12 @@ extends CharacterBody2D
 
 @onready var animation_player = $AnimationPlayer
 
+# @export is customizable for each player-instance
+@export var player_id : int = 0
+@export var attack_animation_speed : int = 2.0
+@export var dash_animation_speed : int = 2.0
+@export var block_animation_speed : float = 0.4
+
 # Player Movement
 var move_input := Vector2.ZERO
 
@@ -18,9 +24,6 @@ var has_attacked: bool
 var has_dashed: bool
 var has_blocked: bool
 
-var attack_speed := 2.0
-var dash_speed := 2.0
-var block_speed := 0.4
 
 var percentage := 0.0
 
@@ -35,7 +38,10 @@ func take_damage(amount: int) -> void:
 
 	
 func _process(delta: float) -> void:
-	var direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	var player = ""
+	if player_id ==1:
+		player = "_2"
+	var direction = Input.get_vector("look_left" + player, "look_right" + player, "look_up" + player, "look_down" + player)
 	var player_position = self.position
 	# This needs to be rotated 90 degrees because look_at looks to the right of the sprite by default
 	look_at(player_position + direction.rotated(-1*(PI / 2)))
@@ -43,7 +49,7 @@ func _process(delta: float) -> void:
 	
 func _dash(horizontal, vertical, dash, delta):	
 	state = States.DASHING
-	animation_player.play("dash", -1, dash_speed)
+	animation_player.play("dash", -1, dash_animation_speed)
 	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
 	velocity.x = horizontal * DASH_SPEED
 	velocity.y = vertical * DASH_SPEED
@@ -58,21 +64,25 @@ func _move(horizontal, vertical, delta):
 
 func _light_attack():
 	state = States.ATTACKING
-	animation_player.play("light_attack", -1, attack_speed)
+	animation_player.play("light_attack", -1, attack_animation_speed) 
 	animation_player.animation_finished.connect(func(_animation): has_attacked = true)
 	
 func _block():
 	state = States.BLOCKING
-	animation_player.play("block", -1, block_speed)
+	animation_player.play("block", -1, block_animation_speed) 
 	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
 	
 func _physics_process(delta: float) -> void:
-	var horizontal := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var vertical := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	var dash := Input.get_action_strength("dash")
-	var light_attack := Input.get_action_strength("light_attack")
-	var block := Input.get_action_strength("block")
-
+	var player = ""
+	if player_id == 1: #player1
+		player = "_2"
+	
+	var horizontal = Input.get_action_strength("move_right" + player) - Input.get_action_strength("move_left" + player)
+	var vertical = Input.get_action_strength("move_down"+ player) - Input.get_action_strength("move_up" + player)
+	var dash = Input.get_action_strength("dash" + player)
+	var light_attack = Input.get_action_strength("light_attack" + player)
+	var block = Input.get_action_strength("block" + player)
+	
 	match state:
 		States.IDLE:
 			animation_player.play("idle")
