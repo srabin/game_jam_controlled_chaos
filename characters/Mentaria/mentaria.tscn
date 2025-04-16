@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bdcw5es8mc58l"]
 
 [ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_ndga5"]
-[ext_resource type="Texture2D" uid="uid://dyll0wh05nvps" path="res://characters/Mentaria/sprite_sheet.png" id="1_yhjtb"]
+[ext_resource type="Texture2D" uid="uid://d0ytpkduw8je3" path="res://characters/Mentaria/mentaria_sprite.png" id="2_0gcko"]
 [ext_resource type="Script" uid="uid://bq6kl2hr2s41d" path="res://HitBox.gd" id="3_0gcko"]
 [ext_resource type="Script" uid="uid://bnpetw7adoobd" path="res://HurtBox.gd" id="4_tux2h"]
 
@@ -198,9 +198,9 @@ scale = Vector2(0.46, 0.46)
 script = ExtResource("1_ndga5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_yhjtb")
+texture = ExtResource("2_0gcko")
 hframes = 21
-vframes = 5
+vframes = 6
 frame = 63
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
