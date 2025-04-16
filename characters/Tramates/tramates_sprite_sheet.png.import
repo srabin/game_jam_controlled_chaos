@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddlmy23k4owna"
-path="res://.godot/imported/tramates_spritesheet.png-e66cd3205c61443bea82941f19adc338.ctex"
+uid="uid://bfk1nyshpvbel"
+path="res://.godot/imported/tramates_sprite_sheet.png-4dea340ea0bbfb9e6fec00991e273cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Tramates/tramates_spritesheet.png"
-dest_files=["res://.godot/imported/tramates_spritesheet.png-e66cd3205c61443bea82941f19adc338.ctex"]
+source_file="res://characters/Tramates/tramates_sprite_sheet.png"
+dest_files=["res://.godot/imported/tramates_sprite_sheet.png-4dea340ea0bbfb9e6fec00991e273cc1.ctex"]
 
 [params]
 
