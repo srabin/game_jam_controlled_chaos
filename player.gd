@@ -20,7 +20,7 @@ var has_blocked: bool
 
 var attack_speed := 2.0
 var dash_speed := 2.0
-var block_speed := 0.4
+var block_speed := 0.3
 
 var percentage := 0.0
 
