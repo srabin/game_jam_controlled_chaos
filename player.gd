@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@onready var dash_timer = $DashTimer
 @onready var animation_player = $AnimationPlayer
 
 # Player Movement
@@ -16,7 +15,9 @@ var inertia = 100.0
 # Player State
 var state: States = States.IDLE
 var has_attacked: bool
+var has_dashed: bool
 var attack_speed := 2.0
+var dash_speed := 2.0
 
 
 enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING}
@@ -24,9 +25,6 @@ enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING}
 func take_damage(amount: int) -> void:
 	print("damage", amount)
 
-func _on_dash_timer_timeout() -> void:
-	state = States.IDLE
-		
 	
 func _process(delta: float) -> void:
 	var direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
@@ -37,7 +35,8 @@ func _process(delta: float) -> void:
 	
 func _dash(horizontal, vertical, dash, delta):	
 	state = States.DASHING
-	dash_timer.start()
+	animation_player.play("dash", -1, dash_speed)
+	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
 	velocity.x = horizontal * DASH_SPEED
 	velocity.y = vertical * DASH_SPEED
 
@@ -49,8 +48,8 @@ func _move(horizontal, vertical, delta):
 
 func _light_attack():
 	state = States.ATTACKING
-	var custom_speed = attack_speed
-	animation_player.play("light_attack", -1, custom_speed)
+	attack_speed
+	animation_player.play("light_attack", -1, attack_speed)
 	animation_player.animation_finished.connect(func(_animation): has_attacked = true)
 	
 	
@@ -72,6 +71,9 @@ func _physics_process(delta: float) -> void:
 				self._light_attack()
 			
 		States.DASHING:
+			if has_dashed:
+				state = States.IDLE
+				has_dashed = false
 			if light_attack:
 				self._light_attack()
 		States.MOVING:

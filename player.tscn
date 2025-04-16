@@ -11,9 +11,3 @@ script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8mm7a")
-
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
