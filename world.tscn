@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=5 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="Texture2D" uid="uid://70e1ixpbfl1w" path="res://icon.svg" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5x1h"]
 size = Vector2(83, 78)
@@ -23,3 +24,6 @@ shape = SubResource("RectangleShape2D_d5x1h")
 
 [node name="Tramates2" parent="." instance=ExtResource("1_tlwt5")]
 position = Vector2(504, 333)
+
+[node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
+position = Vector2(557, 265)
