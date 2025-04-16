@@ -16,11 +16,15 @@ var inertia = 100.0
 var state: States = States.IDLE
 var has_attacked: bool
 var has_dashed: bool
+var has_blocked: bool
+
 var attack_speed := 2.0
 var dash_speed := 2.0
+var block_speed := 2.0
 
 
-enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING}
+
+enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING, BLOCKING}
 
 func take_damage(amount: int) -> void:
 	print("damage", amount)
@@ -43,14 +47,20 @@ func _dash(horizontal, vertical, dash, delta):
 
 func _move(horizontal, vertical, delta):
 	state = States.MOVING
+	if not animation_player.current_animation == "walk" or not animation_player.is_playing():
+		animation_player.play("walk")
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
 
 func _light_attack():
 	state = States.ATTACKING
-	attack_speed
 	animation_player.play("light_attack", -1, attack_speed)
 	animation_player.animation_finished.connect(func(_animation): has_attacked = true)
+	
+func _block():
+	state = States.BLOCKING
+	animation_player.play("block", -1, has_blocked)
+	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
 	
 	
 	
@@ -64,7 +74,8 @@ func _physics_process(delta: float) -> void:
 	match state:
 		States.IDLE:
 			animation_player.play("idle")
-			self._move(horizontal, vertical, delta)
+			if horizontal or vertical:
+				self._move(horizontal, vertical, delta)
 			if dash:
 				self._dash(horizontal, vertical, dash, delta)
 			if light_attack:
@@ -93,6 +104,10 @@ func _physics_process(delta: float) -> void:
 			if has_attacked:
 				state = States.IDLE
 				has_attacked = false
+		States.BLOCKING:
+			if has_blocked:
+				state = States.IDLE
+				has_blocked = false
 	
 	velocity.x = move_toward(velocity.x, 0, DECELERATION_RATE)
 	velocity.y = move_toward(velocity.y, 0, DECELERATION_RATE)

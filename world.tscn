@@ -20,6 +20,3 @@ texture = ExtResource("1_fj7yv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_d5x1h")
-
-[node name="Tramates2" parent="." instance=ExtResource("1_tlwt5")]
-position = Vector2(504, 333)
