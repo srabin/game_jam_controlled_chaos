@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8o7vw8wbevi2"]
+[gd_scene load_steps=16 format=3 uid="uid://b8o7vw8wbevi2"]
 
 [ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_p4iso"]
 [ext_resource type="Texture2D" uid="uid://bfk1nyshpvbel" path="res://characters/Tramates/tramates_sprite_sheet.png" id="2_la2f7"]
@@ -192,11 +192,16 @@ tracks/0/keys = {
 "values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_f8t7h"]
+resource_name = "hurt"
+step = 0.033
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_p4iso"),
 &"block": SubResource("Animation_8c21g"),
 &"dash": SubResource("Animation_7phrs"),
+&"hurt": SubResource("Animation_f8t7h"),
 &"idle": SubResource("Animation_i3pqv"),
 &"light_attack": SubResource("Animation_51wja"),
 &"walk": SubResource("Animation_la2f7")
@@ -221,7 +226,6 @@ vframes = 6
 frame = 78
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(2.4, 2.4)
 shape = SubResource("CircleShape2D_la2f7")
 
