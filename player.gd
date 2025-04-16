@@ -37,10 +37,7 @@ func take_damage(amount: int) -> void:
 
 	
 func _process(delta: float) -> void:
-	var player = ""
-	if player_id ==1:
-		player = "_2"
-	var direction = Input.get_vector("look_left" + player, "look_right" + player, "look_up" + player, "look_down" + player)
+	var direction = Input.get_vector("look_left_" + str(player_id), "look_right_" + str(player_id), "look_up_" + str(player_id), "look_down_" + str(player_id))
 	var player_position = self.position
 	# This needs to be rotated 90 degrees because look_at looks to the right of the sprite by default
 	look_at(player_position + direction.rotated(-1*(PI / 2)))
@@ -76,16 +73,12 @@ func _start_idle():
 		animation_player.play("idle")
 
 	
-func _physics_process(delta: float) -> void:
-	var player = ""
-	if player_id == 1: #player1
-		player = "_2"
-	
-	var horizontal = Input.get_action_strength("move_right" + player) - Input.get_action_strength("move_left" + player)
-	var vertical = Input.get_action_strength("move_down"+ player) - Input.get_action_strength("move_up" + player)
-	var dash = Input.get_action_strength("dash" + player)
-	var light_attack = Input.get_action_strength("light_attack" + player)
-	var block = Input.get_action_strength("block" + player)
+func _physics_process(delta: float) -> void:	
+	var horizontal = Input.get_action_strength("move_right_" + str(player_id)) - Input.get_action_strength("move_left_" + str(player_id))
+	var vertical = Input.get_action_strength("move_down_" + str(player_id)) - Input.get_action_strength("move_up_" + str(player_id))
+	var dash = Input.get_action_strength("dash_" + str(player_id))
+	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
+	var block = Input.get_action_strength("block_" + str(player_id))
 	
 	match state:
 		States.IDLE:
