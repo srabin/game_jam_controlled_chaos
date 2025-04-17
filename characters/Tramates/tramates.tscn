@@ -105,6 +105,10 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1), Vector2i(8, 1), Vector2i(9, 1), Vector2i(10, 1), Vector2i(11, 1), Vector2i(12, 1), Vector2i(13, 1), Vector2i(14, 1), Vector2i(15, 1), Vector2i(16, 1), Vector2i(17, 1), Vector2i(18, 1), Vector2i(19, 1), Vector2i(20, 1), Vector2i(21, 1), Vector2i(22, 1), Vector2i(23, 1), Vector2i(24, 1), Vector2i(25, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_f8t7h"]
+resource_name = "hurt"
+step = 0.033
+
 [sub_resource type="Animation" id="Animation_i3pqv"]
 resource_name = "idle"
 length = 0.4
@@ -191,10 +195,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 }
-
-[sub_resource type="Animation" id="Animation_f8t7h"]
-resource_name = "hurt"
-step = 0.033
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
