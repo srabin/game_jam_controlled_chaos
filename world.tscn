@@ -12,12 +12,12 @@ size = Vector2(83, 78)
 [node name="World" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(633, 332)
-scale = Vector2(0.75, 0.75)
+position = Vector2(651, 347)
 texture = ExtResource("4_aqk2v")
 
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
-position = Vector2(204, 369)
+position = Vector2(208, 373)
+scale = Vector2(1, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
@@ -32,6 +32,7 @@ shape = SubResource("RectangleShape2D_d5x1h")
 
 [node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(1101, 383)
+scale = Vector2(1, 1)
 player_id = 1
 attack_animation_speed = 4
 dash_animation_speed = 3

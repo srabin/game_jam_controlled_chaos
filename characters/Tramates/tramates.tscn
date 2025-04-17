@@ -260,8 +260,7 @@ disabled = true
 debug_color = Color(0.991423, 0, 0.265756, 0.42)
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
-scale = Vector2(2.4, 2.4)
+scale = Vector2(2.54649, 2.79961)
 script = ExtResource("4_7phrs")
 metadata/_custom_type_script = "uid://bnpetw7adoobd"
 
