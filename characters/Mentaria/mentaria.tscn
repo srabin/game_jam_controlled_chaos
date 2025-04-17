@@ -242,7 +242,8 @@ shape = SubResource("CapsuleShape2D_0gcko")
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
+position = Vector2(2.17391, -4.34783)
+scale = Vector2(1.21579, 1.24169)
 script = ExtResource("4_tux2h")
 metadata/_custom_type_script = "uid://bnpetw7adoobd"
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=7 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="Texture2D" uid="uid://cp5a8uwxnnlq2" path="res://environment/assets/MushroomMap 2.png" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://70e1ixpbfl1w" path="res://icon.svg" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://4lxgn82ro8tp" path="res://camera_2d.tscn" id="5_036b0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5x1h"]
 size = Vector2(83, 78)
@@ -16,7 +17,8 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_aqk2v")
 
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
-position = Vector2(490, 254)
+position = Vector2(208, 373)
+scale = Vector2(1, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
@@ -30,8 +32,11 @@ texture = ExtResource("1_fj7yv")
 shape = SubResource("RectangleShape2D_d5x1h")
 
 [node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
-position = Vector2(557, 265)
+position = Vector2(1101, 383)
+scale = Vector2(1, 1)
 player_id = 1
 attack_animation_speed = 4
 dash_animation_speed = 3
 block_animation_speed = 3.0
+
+[node name="Camera2D" parent="." instance=ExtResource("5_036b0")]
