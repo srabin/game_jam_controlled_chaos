@@ -1,16 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=7 format=3 uid="uid://bupbdiq2fg36y"]
 
-[ext_resource type="Texture2D" uid="uid://cp5a8uwxnnlq2" path="res://environment/assets/MushroomMap 2.png" id="1_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://ctmeccfqr7edv" path="res://environment/assets/MushroomBackground 2.png" id="1_036b0"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://wegw2s1fl68o" path="res://environment/assets/MushroomMap 5.png" id="2_036b0"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://4lxgn82ro8tp" path="res://camera_2d.tscn" id="5_036b0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(1445, 742)
+
 [node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(742, 414)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("1_036b0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(633, 332)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_aqk2v")
+texture = ExtResource("2_036b0")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(-633, -332)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(635.5, 356)
+shape = SubResource("RectangleShape2D_036b0")
 
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
 position = Vector2(208, 373)
