@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var attack_animation_speed : int = 2.0
 @export var dash_animation_speed : int = 2.0
 @export var block_animation_speed : float = 0.4
+@export var knockback_modifier : int = 10.0
 
 # Player Movement
 var move_input := Vector2.ZERO
@@ -23,17 +24,21 @@ var state: States = States.IDLE
 var has_attacked: bool
 var has_dashed: bool
 var has_blocked: bool
+var has_hurt: bool
 
 var percentage := 0.0
 
-
-
 enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING, BLOCKING}
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, direction) -> void:
 	if not state == States.BLOCKING:
 		percentage += amount
-		print(percentage)
+		state = States.HURTING
+		velocity.x = direction.x * (1 + percentage * knockback_modifier)
+		velocity.y = direction.y * (1 + percentage * knockback_modifier)
+		animation_player.play("hurt")
+		animation_player.animation_finished.connect(func(_animation): has_hurt = true)
+
 
 	
 func _process(delta: float) -> void:
@@ -118,7 +123,9 @@ func _physics_process(delta: float) -> void:
 				self._start_idle()
 				has_attacked = false
 		States.HURTING:
-			pass
+			if has_hurt:
+				self._start_idle()
+				has_hurt = false
 		States.FALLING:
 			pass
 
