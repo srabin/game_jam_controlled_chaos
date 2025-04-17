@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animation_player = $AnimationPlayer
+@onready var body_collision_shape = $BodyCollisionShape
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
@@ -84,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	var dash = Input.get_action_strength("dash_" + str(player_id))
 	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
 	var block = Input.get_action_strength("block_" + str(player_id))
-	
+
 	match state:
 		States.IDLE:
 			if horizontal or vertical:

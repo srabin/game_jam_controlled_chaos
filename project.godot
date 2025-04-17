@@ -153,6 +153,11 @@ block_1={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Physical"
+2d_physics/layer_2="Hitbox/Hurtbox"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3

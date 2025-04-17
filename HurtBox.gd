@@ -11,6 +11,7 @@ func _ready() -> void:
 	connect("area_entered", _on_area_entered)
 
 func _on_area_entered(hitbox: HitBox) -> void:
+	print("hmm")
 	if hitbox == null:
 		return
 		

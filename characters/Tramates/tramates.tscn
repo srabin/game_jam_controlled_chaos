@@ -238,7 +238,7 @@ hframes = 26
 vframes = 6
 frame = 78
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
 scale = Vector2(2.4, 2.4)
 shape = SubResource("CircleShape2D_la2f7")
 
