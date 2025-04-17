@@ -1,18 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=6 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="Texture2D" uid="uid://70e1ixpbfl1w" path="res://icon.svg" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://d37wu1t5dpb0v" path="res://environment/assets/MushroomMap.png" id="4_aqk2v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5x1h"]
 size = Vector2(83, 78)
 
 [node name="World" type="Node2D"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(633, 332)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_aqk2v")
+
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
 position = Vector2(490, 254)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(222, 242)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
