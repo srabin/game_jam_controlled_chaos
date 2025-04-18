@@ -14,7 +14,7 @@ extends CharacterBody2D
 var move_input := Vector2.ZERO
 
 const SPEED = 500.0
-const DASH_SPEED = SPEED * 1.6
+const DASH_SPEED = SPEED * 2.3
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
@@ -61,11 +61,14 @@ func _start_block():
 	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
 	
 func _start_dash(horizontal, vertical, dash, delta):	
+	var direction = Vector2()
+	direction.x = horizontal
+	direction.y = vertical
 	state = States.DASHING
 	animation_player.play("dash", -1, dash_animation_speed)
 	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
-	velocity.x = horizontal * DASH_SPEED
-	velocity.y = vertical * DASH_SPEED
+	velocity.x = direction.normalized().x * DASH_SPEED
+	velocity.y = direction.normalized().y * DASH_SPEED
 
 func _start_light_attack():
 	state = States.ATTACKING
@@ -80,6 +83,9 @@ func _start_idle():
 
 	
 func _physics_process(delta: float) -> void:	
+	#var dash_horizontal = int(Input.is_action_pressed("move_right_" + str(player_id))) - int(Input.is_action_pressed("move_left_" + str(player_id)))
+	#var dash_vertical = int(Input.is_action_pressed("move_down_" + str(player_id))) - int(Input.is_action_pressed("move_up_" + str(player_id)))
+	
 	var horizontal = Input.get_action_strength("move_right_" + str(player_id)) - Input.get_action_strength("move_left_" + str(player_id))
 	var vertical = Input.get_action_strength("move_down_" + str(player_id)) - Input.get_action_strength("move_up_" + str(player_id))
 	var dash = Input.get_action_strength("dash_" + str(player_id))
