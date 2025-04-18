@@ -30,12 +30,10 @@ shape = SubResource("RectangleShape2D_036b0")
 
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
 position = Vector2(208, 373)
-scale = Vector2(1, 1)
 platform_floor_layers = 4294901760
 
 [node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(1101, 383)
-scale = Vector2(1, 1)
 platform_floor_layers = 4294901760
 player_id = 1
 attack_animation_speed = 4
@@ -43,3 +41,6 @@ dash_animation_speed = 3
 block_animation_speed = 3.0
 
 [node name="Camera2D" parent="." instance=ExtResource("5_036b0")]
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="Tramates" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Area2D" to="Mentaria" method="_on_area_2d_body_exited"]
