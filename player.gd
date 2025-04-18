@@ -60,15 +60,21 @@ func _start_block():
 	animation_player.play("block", -1, block_animation_speed)
 	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
 	
-func _start_dash(horizontal, vertical, dash, delta):	
+func _start_dash(horizontal, vertical, dash, delta):
+	state = States.DASHING	
 	var direction = Vector2()
-	direction.x = horizontal
-	direction.y = vertical
-	state = States.DASHING
-	animation_player.play("dash", -1, dash_animation_speed)
-	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
+	if horizontal or vertical:
+		direction.x = horizontal
+		direction.y = vertical
+	else:
+		rotation = global_transform.get_rotation()
+		direction = Vector2(0, 1).rotated(rotation)
+
 	velocity.x = direction.normalized().x * DASH_SPEED
 	velocity.y = direction.normalized().y * DASH_SPEED
+	
+	animation_player.play("dash", -1, dash_animation_speed)
+	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
 
 func _start_light_attack():
 	state = States.ATTACKING
