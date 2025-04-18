@@ -18,6 +18,7 @@ const DASH_SPEED = SPEED * 2.3
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
+const MAX_FALL_TIME = 2.0
 var inertia = 100.0
 
 # Player State
@@ -26,10 +27,12 @@ var has_attacked: bool
 var has_dashed: bool
 var has_blocked: bool
 var has_hurt: bool
+var time_falling: float = 0.0
+var is_falling = false
 
 var percentage := 0.0
 
-enum States {IDLE, DASHING, MOVING, HURTING, FALLING, ATTACKING, BLOCKING}
+enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD}
 
 func take_damage(amount: int, direction) -> void:
 	if not state == States.BLOCKING:
@@ -89,15 +92,27 @@ func _start_idle():
 
 	
 func _physics_process(delta: float) -> void:	
-	#var dash_horizontal = int(Input.is_action_pressed("move_right_" + str(player_id))) - int(Input.is_action_pressed("move_left_" + str(player_id)))
-	#var dash_vertical = int(Input.is_action_pressed("move_down_" + str(player_id))) - int(Input.is_action_pressed("move_up_" + str(player_id)))
-	
+
+	if self.state == States.DEAD:
+		return
+		
 	var horizontal = Input.get_action_strength("move_right_" + str(player_id)) - Input.get_action_strength("move_left_" + str(player_id))
 	var vertical = Input.get_action_strength("move_down_" + str(player_id)) - Input.get_action_strength("move_up_" + str(player_id))
 	var dash = Input.get_action_strength("dash_" + str(player_id))
 	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
 	var block = Input.get_action_strength("block_" + str(player_id))
-
+	
+	if is_falling == true:
+		time_falling += delta
+	else:
+		time_falling = 0.0
+		
+	#STATE = DEAD
+	if time_falling > MAX_FALL_TIME:
+		self.animation_player.play("falling",3)
+		self.state = States.DEAD
+		#remove collision 
+	
 	match state:
 		States.IDLE:
 			if horizontal or vertical:
@@ -139,8 +154,7 @@ func _physics_process(delta: float) -> void:
 			if has_hurt:
 				self._start_idle()
 				has_hurt = false
-		States.FALLING:
-			pass
+
 
 	
 	velocity.x = move_toward(velocity.x, 0, DECELERATION_RATE)
@@ -155,3 +169,13 @@ func _physics_process(delta: float) -> void:
 	var collision = get_last_slide_collision()
 	if collision:
 		velocity = initial_velocity.bounce(collision.get_normal())
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	body.is_falling = true
+
+	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	body.is_falling = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8o7vw8wbevi2"]
+[gd_scene load_steps=17 format=3 uid="uid://b8o7vw8wbevi2"]
 
 [ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_p4iso"]
 [ext_resource type="Texture2D" uid="uid://bfk1nyshpvbel" path="res://characters/Tramates/tramates_sprite_sheet.png" id="2_la2f7"]
@@ -69,6 +69,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TramatesSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_8c21g"]
@@ -209,11 +221,28 @@ tracks/0/keys = {
 "values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_6bi6c"]
+resource_name = "falling"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TramatesSprite:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.332218, 0.699986, 1.09963, 1.39791, 1.80123),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(0.6, 0.6), Vector2(0.4, 0.4), Vector2(0.2, 0.2), Vector2(1e-05, 1e-05)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_p4iso"),
 &"block": SubResource("Animation_8c21g"),
 &"dash": SubResource("Animation_7phrs"),
+&"falling": SubResource("Animation_6bi6c"),
 &"hurt": SubResource("Animation_f8t7h"),
 &"idle": SubResource("Animation_i3pqv"),
 &"light_attack": SubResource("Animation_51wja"),
@@ -228,8 +257,6 @@ height = 35.3429
 radius = 32.0
 
 [node name="Tramates" type="CharacterBody2D"]
-position = Vector2(0, -8)
-scale = Vector2(0.46, 0.46)
 script = ExtResource("1_p4iso")
 
 [node name="TramatesSprite" type="Sprite2D" parent="."]
