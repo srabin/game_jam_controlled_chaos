@@ -171,11 +171,9 @@ func _physics_process(delta: float) -> void:
 		velocity = initial_velocity.bounce(collision.get_normal())
 
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_platform_body_exited(body: Node2D) -> void:
 	body.is_falling = true
 
-	
 
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_platform_body_entered(body: Node2D) -> void:
 	body.is_falling = false
