@@ -1,11 +1,17 @@
 extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var resume_button: Button = $PanelContainer/VBoxContainer/Resume
+@onready var title_screen_button: Button = $"PanelContainer/VBoxContainer/Title Screen"
+@onready var quit_button: Button = $PanelContainer/VBoxContainer/Quit
 
 var is_paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animation_player.play("RESET")
+	resume_button.disabled = false
+	title_screen_button.disabled = false
+	quit_button.disabled = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,10 +41,16 @@ func _on_quit_pressed() -> void:
 func pause() -> void:
 	get_tree().paused = true
 	animation_player.play("blur")
+	resume_button.disabled = false
+	title_screen_button.disabled = false
+	quit_button.disabled = false
 	
 func resume() -> void:
 	get_tree().paused = false
 	animation_player.play_backwards("blur")
+	resume_button.disabled = true
+	title_screen_button.disabled = true
+	quit_button.disabled = true
 
 
 func _on_pause_button_pressed() -> void:

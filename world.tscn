@@ -78,13 +78,13 @@ block_animation_speed = 4.25
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_pkg7o")]
 
-[node name="PauseButton" type="MenuButton" parent="CanvasLayer"]
+[node name="PauseButton" type="Button" parent="CanvasLayer"]
 process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -55.0
-offset_bottom = 31.0
+offset_left = -113.0
+offset_bottom = 42.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "Pause (P)"
