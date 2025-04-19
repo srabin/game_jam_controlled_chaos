@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b14nn8m5kk2vx"]
+
+[ext_resource type="FontFile" uid="uid://c8vw0cf2r425q" path="res://ui/bl-alzyer.ttf" id="1_d8awb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8awb"]
+bg_color = Color(0.362829, 0.362829, 0.362829, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d8awb"]
+
+[resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_d8awb")
+Button/styles/hover = SubResource("StyleBoxFlat_d8awb")
+Button/styles/normal = SubResource("StyleBoxEmpty_d8awb")
+Label/font_sizes/font_size = 100
+Label/fonts/font = ExtResource("1_d8awb")
