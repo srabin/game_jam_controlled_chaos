@@ -12,10 +12,10 @@ func _process(delta):
 	var zoom_factor_y = abs(tramates.global_position.y-mentaria.global_position.y)
 	
 	#TODO: tweak 500, as well as the upper/lower bounds of the zoomfactor
-	var max_zoom_factor = 500/max(zoom_factor_x, zoom_factor_y) 
+	var max_zoom_factor = 300/max(zoom_factor_x, zoom_factor_y) 
 #
 	##print((max_zoom_factor))
-	var zoom_factor = clamp(max_zoom_factor, 0.5,1.5)
+	var zoom_factor = clamp(max_zoom_factor, 0.5, 1.7)
 #
 	self.zoom = Vector2(zoom_factor, zoom_factor)
 	

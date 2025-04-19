@@ -15,7 +15,7 @@ scale = Vector2(1.89594, 2.105)
 texture = ExtResource("1_036b0")
 
 [node name="Platform" parent="." instance=ExtResource("5_gbfbk")]
-position = Vector2(640, 340)
+position = Vector2(662, 340)
 scale = Vector2(1.38808, 1.45062)
 
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
@@ -29,7 +29,7 @@ platform_floor_layers = 4294901760
 player_id = 1
 attack_animation_speed = 4.0
 dash_animation_speed = 4.5
-block_animation_speed = 3.0
+block_animation_speed = 4.25
 
 [node name="Camera2D" parent="." instance=ExtResource("5_036b0")]
 
