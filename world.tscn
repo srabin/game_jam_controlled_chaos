@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=9 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="1_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://4lxgn82ro8tp" path="res://camera_2d.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://dxvswjrk6i6ag" path="res://environment/platform.tscn" id="5_gbfbk"]
@@ -10,10 +11,50 @@
 
 [node name="World" type="Node2D"]
 
+[node name="Background5" type="Sprite2D" parent="."]
+position = Vector2(-1540, 415)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("1_pkg7o")
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(742, 414)
 scale = Vector2(1.89594, 2.105)
 texture = ExtResource("1_pkg7o")
+
+[node name="Background4" type="Sprite2D" parent="."]
+position = Vector2(3068, 404)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("1_pkg7o")
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(745, 2307)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
+
+[node name="Background6" type="Sprite2D" parent="."]
+position = Vector2(3772, 2301)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
+
+[node name="Background7" type="Sprite2D" parent="."]
+position = Vector2(3776, -1479)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
+
+[node name="Background8" type="Sprite2D" parent="."]
+position = Vector2(747, -1480)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
+
+[node name="Background9" type="Sprite2D" parent="."]
+position = Vector2(-2276, -1480)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
+
+[node name="Background3" type="Sprite2D" parent="."]
+position = Vector2(-2286, 2307)
+scale = Vector2(1.89594, 2.105)
+texture = ExtResource("2_gbfbk")
 
 [node name="Platform" parent="." instance=ExtResource("5_gbfbk")]
 position = Vector2(662, 340)
