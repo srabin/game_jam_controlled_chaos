@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=8 format=3 uid="uid://bupbdiq2fg36y"]
 
-[ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="1_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
@@ -14,17 +13,17 @@
 [node name="Background5" type="Sprite2D" parent="."]
 position = Vector2(-1540, 415)
 scale = Vector2(1.89594, 2.105)
-texture = ExtResource("1_pkg7o")
+texture = ExtResource("2_gbfbk")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(742, 414)
 scale = Vector2(1.89594, 2.105)
-texture = ExtResource("1_pkg7o")
+texture = ExtResource("2_gbfbk")
 
 [node name="Background4" type="Sprite2D" parent="."]
 position = Vector2(3068, 404)
 scale = Vector2(1.89594, 2.105)
-texture = ExtResource("1_pkg7o")
+texture = ExtResource("2_gbfbk")
 
 [node name="Background2" type="Sprite2D" parent="."]
 position = Vector2(745, 2307)
