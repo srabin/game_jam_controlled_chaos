@@ -40,7 +40,7 @@ func take_damage(amount: int, direction) -> void:
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
-		animation_player.play("hurt")
+		animation_player.play("hurt", 2)
 		animation_player.animation_finished.connect(_on_animation_finished)
 
 
@@ -73,7 +73,7 @@ func _start_move(horizontal, vertical, delta):
 func _start_block():
 	state = States.BLOCKING
 	animation_player.stop()
-	animation_player.play("block", -1, block_animation_speed)
+	animation_player.play("block", 2, block_animation_speed)
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 	
@@ -92,20 +92,20 @@ func _start_dash(horizontal, vertical, dash, delta):
 	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
 	animation_player.stop()
-	animation_player.play("dash", -1, dash_animation_speed)
+	animation_player.play("dash", 2, dash_animation_speed)
 	animation_player.animation_finished.connect(_on_animation_finished)
 		
 func _start_light_attack():
 	state = States.ATTACKING
 	animation_player.stop()
-	animation_player.play("light_attack", -1, attack_animation_speed) 
+	animation_player.play("light_attack", 2, attack_animation_speed) 
 	animation_player.animation_finished.connect(_on_animation_finished)
 	
 
 func _start_idle():
 	state = States.IDLE
 	if animation_player.current_animation == "walk" or not animation_player.is_playing():
-		animation_player.queue("idle")
+		animation_player.play("idle")
 
 	
 func _physics_process(delta: float) -> void:	
@@ -126,7 +126,7 @@ func _physics_process(delta: float) -> void:
 	#STATE = DEAD
 	if time_falling > MAX_FALL_TIME:
 		self.animation_player.stop()
-		self.animation_player.play("falling",3)
+		self.animation_player.play("falling", -1, 3)
 		self.state = States.DEAD
 		#remove collision 
 	
