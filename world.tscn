@@ -41,6 +41,7 @@ offset_bottom = -657.0
 scale = Vector2(94.6492, 58.0226)
 
 [node name="LoadingScreen" parent="UI" instance=ExtResource("8_ioo17")]
+visible = false
 layout_mode = 1
 
 [connection signal="body_entered" from="Platform" to="Tramates" method="_on_platform_body_entered"]

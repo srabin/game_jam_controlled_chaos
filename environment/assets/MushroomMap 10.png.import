@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d37wu1t5dpb0v"
-path="res://.godot/imported/MushroomMap.png-ca9b9f5f6ba9dced75f4235a1b973ee5.ctex"
+uid="uid://dxk6dvmos5855"
+path="res://.godot/imported/MushroomMap 10.png-b34e677cd5378e5f3deee2e0f9f5f861.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/assets/MushroomMap.png"
-dest_files=["res://.godot/imported/MushroomMap.png-ca9b9f5f6ba9dced75f4235a1b973ee5.ctex"]
+source_file="res://environment/assets/MushroomMap 10.png"
+dest_files=["res://.godot/imported/MushroomMap 10.png-b34e677cd5378e5f3deee2e0f9f5f861.ctex"]
 
 [params]
 

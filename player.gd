@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	var dash = Input.get_action_strength("dash_" + str(player_id))
 	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
 	var block = Input.get_action_strength("block_" + str(player_id))
-	
+	print(is_falling)
 	if is_falling == true:
 		time_falling += delta
 	else:
