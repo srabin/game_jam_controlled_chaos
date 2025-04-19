@@ -21,12 +21,14 @@ scale = Vector2(1.38808, 1.45062)
 [node name="Tramates" parent="." instance=ExtResource("1_tlwt5")]
 position = Vector2(208, 373)
 platform_floor_layers = 4294901760
+attack_animation_speed = 2.5
 
 [node name="Mentaria" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(1101, 383)
 platform_floor_layers = 4294901760
 player_id = 1
-attack_animation_speed = 4
+attack_animation_speed = 4.0
+dash_animation_speed = 4.5
 block_animation_speed = 3.0
 
 [node name="Camera2D" parent="." instance=ExtResource("5_036b0")]

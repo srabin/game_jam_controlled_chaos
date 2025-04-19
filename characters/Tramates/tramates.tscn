@@ -169,7 +169,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_51wja"]
 resource_name = "light_attack"
-length = 0.86
+length = 1.2
 step = 0.033
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -178,7 +178,7 @@ tracks/0/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.4, 0.434291, 0.465187, 0.50398, 0.53379, 0.567622, 0.568142, 0.59994, 0.634976, 0.66493),
+"times": PackedFloat32Array(0.7, 0.734291, 0.765187, 0.80398, 0.83379, 0.867622, 0.868142, 0.89994, 0.934976, 0.96493),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(24, 40), Vector2(16, 48), Vector2(10, 48), Vector2(2, 48), Vector2(-13, 56), Vector2(-16, 56), Vector2(-13, 56), Vector2(-16, 56), Vector2(-26, 55.5), Vector2(-29, 46)]
@@ -190,7 +190,7 @@ tracks/1/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4, 0.434291, 0.465187, 0.50398, 0.53379, 0.567622, 0.568142, 0.59994, 0.634976, 0.66493),
+"times": PackedFloat32Array(0.7, 0.734291, 0.765187, 0.80398, 0.83379, 0.867622, 0.868142, 0.89994, 0.934976, 0.96493),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [-0.619592, -0.443314, 0.0, 0.0, 0.26529, 0.79587, 0.352556, 0.972148, 1.14843, 1.14843]
@@ -202,7 +202,7 @@ tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.400229, 0.713813),
+"times": PackedFloat32Array(0, 0.700229, 1.01381),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -214,7 +214,7 @@ tracks/3/path = NodePath("TramatesSprite:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.033, 0.066, 0.099, 0.132, 0.165, 0.198, 0.231, 0.264, 0.297, 0.33, 0.363, 0.396, 0.429, 0.462, 0.495, 0.528, 0.561, 0.594, 0.627, 0.66, 0.693, 0.726, 0.759, 0.792, 0.825),
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.233333, 0.3, 0.366667, 0.433333, 0.5, 0.566667, 0.63, 0.663, 0.696, 0.729, 0.762, 0.795, 0.828, 0.861, 0.894, 0.927, 0.96, 0.993, 1.026, 1.059, 1.092, 1.125),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3), Vector2i(8, 3), Vector2i(9, 3), Vector2i(10, 3), Vector2i(11, 3), Vector2i(12, 3), Vector2i(13, 3), Vector2i(14, 3), Vector2i(15, 3), Vector2i(16, 3), Vector2i(17, 3), Vector2i(18, 3), Vector2i(19, 3), Vector2i(20, 3), Vector2i(21, 3), Vector2i(22, 3), Vector2i(23, 3), Vector2i(24, 3), Vector2i(25, 3)]

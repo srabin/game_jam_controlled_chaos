@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
-@export var attack_animation_speed : int = 2.0
-@export var dash_animation_speed : int = 2.0
+@export var attack_animation_speed : float = 2.0
+@export var dash_animation_speed : float = 2.0
 @export var block_animation_speed : float = 0.4
 @export var knockback_modifier : int = 10.0
 
@@ -39,6 +39,7 @@ func take_damage(amount: int, direction) -> void:
 		state = States.HURTING
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
+		animation_player.stop()
 		animation_player.play("hurt")
 		animation_player.animation_finished.connect(func(_animation): has_hurt = true)
 
@@ -48,7 +49,8 @@ func _process(delta: float) -> void:
 	var direction = Input.get_vector("look_left_" + str(player_id), "look_right_" + str(player_id), "look_up_" + str(player_id), "look_down_" + str(player_id))
 	var player_position = self.position
 	# This needs to be rotated 90 degrees because look_at looks to the right of the sprite by default
-	look_at(player_position + direction.rotated(-1*(PI / 2)))
+	if state != States.DASHING:
+		look_at(player_position + direction.rotated(-1*(PI / 2)))
 
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
@@ -74,6 +76,7 @@ func _start_dash(horizontal, vertical, dash, delta):
 
 	velocity.x = direction.normalized().x * DASH_SPEED
 	velocity.y = direction.normalized().y * DASH_SPEED
+	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
 	animation_player.play("dash", -1, dash_animation_speed)
 	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
@@ -91,7 +94,6 @@ func _start_idle():
 
 	
 func _physics_process(delta: float) -> void:	
-
 	if self.state == States.DEAD:
 		return
 		
@@ -100,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	var dash = Input.get_action_strength("dash_" + str(player_id))
 	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
 	var block = Input.get_action_strength("block_" + str(player_id))
-	print(is_falling)
+	
 	if is_falling == true:
 		time_falling += delta
 	else:
@@ -150,6 +152,7 @@ func _physics_process(delta: float) -> void:
 				self._start_idle()
 				has_attacked = false
 		States.HURTING:
+			print(animation_player.assigned_animation)
 			if has_hurt:
 				self._start_idle()
 				has_hurt = false
@@ -165,9 +168,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# not sure why last slide... but seth said it feels better
-	var collision = get_last_slide_collision()
-	if collision:
-		velocity = initial_velocity.bounce(collision.get_normal())
+	#var collision = get_last_slide_collision()
+	#if collision:
+		#velocity = initial_velocity.bounce(collision.get_normal())
 
 
 func _on_platform_body_exited(body: Node2D) -> void:
