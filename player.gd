@@ -17,7 +17,7 @@ const DASH_SPEED = SPEED * 2.3
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
-const MAX_FALL_TIME = 2.0
+const MAX_FALL_TIME = 1.0
 var inertia = 100.0
 
 # Player State
@@ -41,7 +41,7 @@ func take_damage(amount: int, direction) -> void:
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
 		animation_player.play("hurt")
-		animation_player.animation_finished.connect(func(_animation): has_hurt = true)
+		animation_player.animation_finished.connect(_on_animation_finished)
 
 
 	
@@ -52,17 +52,30 @@ func _process(delta: float) -> void:
 	if state != States.DASHING:
 		look_at(player_position + direction.rotated(-1*(PI / 2)))
 
+func _on_animation_finished(_animation):
+	match _animation:
+		"light_attack":
+			has_attacked = true
+		"dash":
+			has_dashed = true
+		"block":
+			has_blocked = true 
+		"hurt":
+			has_hurt = true
+			
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
-	if not animation_player.current_animation == "walk" or not animation_player.is_playing():
+	if animation_player.current_animation == "idle" or not animation_player.is_playing():
 		animation_player.play("walk")
 	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
 
 func _start_block():
 	state = States.BLOCKING
+	animation_player.stop()
 	animation_player.play("block", -1, block_animation_speed)
-	animation_player.animation_finished.connect(func(_animation): has_blocked = true)
+	animation_player.animation_finished.connect(_on_animation_finished)
+
 	
 func _start_dash(horizontal, vertical, dash, delta):
 	state = States.DASHING	
@@ -78,19 +91,21 @@ func _start_dash(horizontal, vertical, dash, delta):
 	velocity.y = direction.normalized().y * DASH_SPEED
 	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
+	animation_player.stop()
 	animation_player.play("dash", -1, dash_animation_speed)
-	animation_player.animation_finished.connect(func(_animation): has_dashed = true)
-
+	animation_player.animation_finished.connect(_on_animation_finished)
+		
 func _start_light_attack():
 	state = States.ATTACKING
+	animation_player.stop()
 	animation_player.play("light_attack", -1, attack_animation_speed) 
-	animation_player.animation_finished.connect(func(_animation): has_attacked = true)
+	animation_player.animation_finished.connect(_on_animation_finished)
 	
 
 func _start_idle():
 	state = States.IDLE
-	if not animation_player.current_animation == "idle" or not animation_player.is_playing():
-		animation_player.play("idle")
+	if animation_player.current_animation == "walk" or not animation_player.is_playing():
+		animation_player.queue("idle")
 
 	
 func _physics_process(delta: float) -> void:	
@@ -99,9 +114,9 @@ func _physics_process(delta: float) -> void:
 		
 	var horizontal = Input.get_action_strength("move_right_" + str(player_id)) - Input.get_action_strength("move_left_" + str(player_id))
 	var vertical = Input.get_action_strength("move_down_" + str(player_id)) - Input.get_action_strength("move_up_" + str(player_id))
-	var dash = Input.get_action_strength("dash_" + str(player_id))
-	var light_attack = Input.get_action_strength("light_attack_" + str(player_id))
-	var block = Input.get_action_strength("block_" + str(player_id))
+	var dash = Input.is_action_just_pressed("dash_" + str(player_id))
+	var light_attack = Input.is_action_just_pressed("light_attack_" + str(player_id))
+	var block = Input.is_action_just_pressed("block_" + str(player_id))
 	
 	if is_falling == true:
 		time_falling += delta
@@ -110,6 +125,7 @@ func _physics_process(delta: float) -> void:
 		
 	#STATE = DEAD
 	if time_falling > MAX_FALL_TIME:
+		self.animation_player.stop()
 		self.animation_player.play("falling",3)
 		self.state = States.DEAD
 		#remove collision 
@@ -152,7 +168,6 @@ func _physics_process(delta: float) -> void:
 				self._start_idle()
 				has_attacked = false
 		States.HURTING:
-			print(animation_player.assigned_animation)
 			if has_hurt:
 				self._start_idle()
 				has_hurt = false
