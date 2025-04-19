@@ -1,0 +1,392 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4fxc03emq2yr"]
+
+[ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="1_ewaii"]
+[ext_resource type="Script" uid="uid://ctiwmrxpoed3o" path="res://ui/controls.gd" id="1_ob35n"]
+[ext_resource type="Script" uid="uid://clynu5uhdpots" path="res://ui/input_map.gd" id="2_3bxso"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ob35n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.26795, 0.21602, 0.412992, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 20.0
+offset_right = 650.0
+offset_bottom = 170.0
+theme = ExtResource("1_ewaii")
+text = "CONTROLS"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Player1" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+theme = ExtResource("1_ewaii")
+theme_override_font_sizes/font_size = 32
+text = "Player 1 "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="MoveUpLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Up:"
+
+[node name="MoveUpButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_up_0"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="MoveDownLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer8"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Down:"
+
+[node name="MoveDownButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer8"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_down_0"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="MoveRightLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer7"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Right:"
+
+[node name="MoveRightButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer7"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_right_0"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="MoveLeftLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer6"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Left:"
+
+[node name="MoveLeftButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer6"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_left_0"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="DashLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dash:"
+
+[node name="DashButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer5"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "dash_0"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="BlockLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Block:"
+
+[node name="BlockButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer4"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "block_0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Attack:"
+
+[node name="AttackButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer3"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "light_attack_0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
+layout_mode = 2
+
+[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Face Direction:"
+
+[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Cursor"
+
+[node name="Player2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+theme = ExtResource("1_ewaii")
+theme_override_font_sizes/font_size = 32
+text = "Player 2"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="MoveUpLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Up:"
+
+[node name="MoveUpButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_up_1"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="MoveDownLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer8"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Down:"
+
+[node name="MoveDownButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer8"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_down_1"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="MoveRightLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer7"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Right:"
+
+[node name="MoveRightButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer7"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_right_1"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="MoveLeftLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer6"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Move Left:"
+
+[node name="MoveLeftButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer6"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "move_left_1"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="DashLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dash:"
+
+[node name="DashButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer5"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "dash_1"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="BlockLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Block:"
+
+[node name="BlockButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer4"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "block_1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Attack:"
+
+[node name="AttackButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer3"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_3bxso")
+action = "light_attack_1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Face Direction:"
+
+[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Cursor"
+
+[node name="Controller" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+theme = ExtResource("1_ewaii")
+theme_override_font_sizes/font_size = 32
+text = "CONTROLLER"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+
+[node name="MoveUpLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Movement:"
+
+[node name="MoveUpButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+disabled = true
+text = "Left Stick "
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+
+[node name="DashLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dash:"
+
+[node name="DashButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer5"]
+process_mode = 3
+layout_mode = 2
+disabled = true
+text = "Left Trigger (L2, LT), Joypad Button 0"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+
+[node name="BlockLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Block:"
+
+[node name="BlockButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer4"]
+process_mode = 3
+layout_mode = 2
+disabled = true
+text = "Left Shoulder (L1, LB)"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Attack:"
+
+[node name="AttackButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer3"]
+process_mode = 3
+layout_mode = 2
+disabled = true
+text = "Right Shoulder (R1, RB)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 2
+
+[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Face Direction:"
+
+[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+disabled = true
+text = "Right Stick"
+
+[node name="ReturnButton" type="Button" parent="."]
+process_mode = 3
+layout_mode = 2
+offset_left = 447.0
+offset_top = 640.0
+offset_right = 833.0
+offset_bottom = 700.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("1_ewaii")
+theme_override_font_sizes/font_size = 40
+text = "Return To Main"
+
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

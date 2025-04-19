@@ -12,6 +12,8 @@ config_version=5
 
 config/name="game_jam_controlled_chaos"
 run/main_scene="uid://dr5bolxtuxvab"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="InputMappings"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +22,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/default_font_subpixel_positioning=0
 
 [input]
 
