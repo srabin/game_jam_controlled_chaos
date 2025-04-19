@@ -1,6 +1,73 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr5bolxtuxvab"]
+[gd_scene load_steps=9 format=3 uid="uid://dr5bolxtuxvab"]
 
 [ext_resource type="Script" uid="uid://bh78yu5s0lokt" path="res://ui/title_screen.gd" id="1_v6p8y"]
+[ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_dk6f0"]
+[ext_resource type="Texture2D" uid="uid://d0ytpkduw8je3" path="res://characters/Mentaria/mentaria_sprite.png" id="2_qer0c"]
+[ext_resource type="Texture2D" uid="uid://bfk1nyshpvbel" path="res://characters/Tramates/tramates_sprite_sheet.png" id="3_dk6f0"]
+
+[sub_resource type="Theme" id="Theme_6qcwj"]
+
+[sub_resource type="Animation" id="Animation_dk6f0"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.204724, 0.404545, 0.599463),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.203499, 0.40332, 0.600689),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_l1ku3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1ku3"]
+_data = {
+&"RESET": SubResource("Animation_l1ku3"),
+&"idle": SubResource("Animation_dk6f0")
+}
 
 [node name="TitleScreen" type="Control"]
 process_mode = 3
@@ -10,7 +77,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_6qcwj")
 script = ExtResource("1_v6p8y")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(638, 359)
+scale = Vector2(0.7975, 0.795555)
+texture = ExtResource("2_dk6f0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(252, 546)
+scale = Vector2(3, 3)
+texture = ExtResource("2_qer0c")
+hframes = 21
+vframes = 6
+frame = 85
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1029, 474)
+scale = Vector2(3, 3)
+texture = ExtResource("3_dk6f0")
+hframes = 26
+vframes = 6
+frame = 105
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
@@ -52,6 +141,12 @@ offset_bottom = 592.0
 scale = Vector2(3.71912, 2.51165)
 text = "Quit"
 icon_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l1ku3")
+}
+autoplay = "idle"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ControlsButton" to="." method="_on_controls_button_pressed"]

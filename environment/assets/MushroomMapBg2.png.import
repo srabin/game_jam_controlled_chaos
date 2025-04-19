@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x2vtue0444na"
-path="res://.godot/imported/beastlands.png-d0cd3b2df66f71d8ddda8db68d39c701.ctex"
+uid="uid://b04g8hrnu2d7l"
+path="res://.godot/imported/MushroomMapBg2.png-da0154c2caf1dd751aa688867391d54c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/assets/beastlands.png"
-dest_files=["res://.godot/imported/beastlands.png-d0cd3b2df66f71d8ddda8db68d39c701.ctex"]
+source_file="res://environment/assets/MushroomMapBg2.png"
+dest_files=["res://.godot/imported/MushroomMapBg2.png-da0154c2caf1dd751aa688867391d54c.ctex"]
 
 [params]
 
