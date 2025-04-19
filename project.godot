@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="game_jam_controlled_chaos"
-run/main_scene="uid://bupbdiq2fg36y"
+run/main_scene="uid://dr5bolxtuxvab"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

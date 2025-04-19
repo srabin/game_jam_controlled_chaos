@@ -1,16 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=7 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="Texture2D" uid="uid://ctmeccfqr7edv" path="res://environment/assets/MushroomBackground 2.png" id="1_036b0"]
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://crd6moxlbuwp4" path="res://environment/assets/MushroomMapLarge.png" id="2_036b0"]
-[ext_resource type="Texture2D" uid="uid://b7v0bap2v7kp" path="res://environment/assets/MushroomMapMedium.png" id="3_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://cpwjwvl6jton4" path="res://environment/assets/MushroomMapSmall.png" id="4_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://4lxgn82ro8tp" path="res://camera_2d.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://dxvswjrk6i6ag" path="res://environment/platform.tscn" id="5_gbfbk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
-size = Vector2(1445, 742)
+[ext_resource type="PackedScene" uid="uid://dv43txoddtd5l" path="res://loading_screen.tscn" id="8_ioo17"]
 
 [node name="World" type="Node2D"]
 
@@ -18,45 +13,6 @@ size = Vector2(1445, 742)
 position = Vector2(742, 414)
 scale = Vector2(1.89594, 2.105)
 texture = ExtResource("1_036b0")
-
-[node name="MushroomMapLarge" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(633, 332)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("2_036b0")
-
-[node name="Area2D" type="Area2D" parent="MushroomMapLarge"]
-position = Vector2(-633, -332)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MushroomMapLarge/Area2D"]
-position = Vector2(635.5, 356)
-shape = SubResource("RectangleShape2D_036b0")
-
-[node name="MushroomMapMedium" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(633, 332)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("3_pkg7o")
-
-[node name="Area2D" type="Area2D" parent="MushroomMapMedium"]
-position = Vector2(-633, -332)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MushroomMapMedium/Area2D"]
-position = Vector2(635.5, 356)
-shape = SubResource("RectangleShape2D_036b0")
-
-[node name="MushroomMapSmall" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(633, 332)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("4_gbfbk")
-
-[node name="Area2D" type="Area2D" parent="MushroomMapSmall"]
-position = Vector2(-633, -332)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MushroomMapSmall/Area2D"]
-position = Vector2(635.5, 356)
-shape = SubResource("RectangleShape2D_036b0")
 
 [node name="Platform" parent="." instance=ExtResource("5_gbfbk")]
 position = Vector2(640, 340)
@@ -74,6 +30,18 @@ attack_animation_speed = 4
 block_animation_speed = 3.0
 
 [node name="Camera2D" parent="." instance=ExtResource("5_036b0")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1018.0
+offset_top = -697.0
+offset_right = -978.0
+offset_bottom = -657.0
+scale = Vector2(94.6492, 58.0226)
+
+[node name="LoadingScreen" parent="UI" instance=ExtResource("8_ioo17")]
+layout_mode = 1
 
 [connection signal="body_entered" from="Platform" to="Tramates" method="_on_platform_body_entered"]
 [connection signal="body_exited" from="Platform" to="Tramates" method="_on_platform_body_exited"]

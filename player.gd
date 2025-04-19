@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var animation_player = $AnimationPlayer
-@onready var body_collision_shape = $BodyCollisionShape
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
