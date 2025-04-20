@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr5bolxtuxvab"]
+[gd_scene load_steps=11 format=3 uid="uid://dr5bolxtuxvab"]
 
 [ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="1_l1ku3"]
 [ext_resource type="Script" uid="uid://bh78yu5s0lokt" path="res://ui/title_screen.gd" id="1_v6p8y"]
 [ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_dk6f0"]
 [ext_resource type="Texture2D" uid="uid://d0ytpkduw8je3" path="res://characters/Mentaria/mentaria_sprite.png" id="2_qer0c"]
 [ext_resource type="Texture2D" uid="uid://bfk1nyshpvbel" path="res://characters/Tramates/tramates_sprite_sheet.png" id="3_dk6f0"]
+[ext_resource type="AudioStream" uid="uid://7vaquvaf5skg" path="res://sounds/select_beep.wav" id="6_6qcwj"]
+[ext_resource type="AudioStream" uid="uid://dvn56baf6pein" path="res://sounds/select_click.wav" id="7_wa5rm"]
 
 [sub_resource type="Animation" id="Animation_l1ku3"]
 length = 0.001
@@ -154,7 +156,17 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="SelectBeep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_6qcwj")
+
+[node name="SelectClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wa5rm")
+
+[connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/ControlsButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/SettingsButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -60,6 +60,7 @@ func take_damage(amount: int, direction, attacker) -> void:
 		attacker.block_stun()
 		animation_player.stop()
 		self._start_idle()
+	
 
 func _ready():
 	initial_modulate = sprite.get_modulate()
