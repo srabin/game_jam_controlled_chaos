@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
+@onready var stage_crumble_sound: AudioStreamPlayer2D = $StageCrumble
 
 var order_of_animations = ["medium", "small"]
 var cur_animation = 0
@@ -17,5 +18,6 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	if cur_animation <= len(order_of_animations) - 1:
+		stage_crumble_sound.play()
 		animation_player.play(order_of_animations[cur_animation], -1, 0.5)
 		cur_animation += 1

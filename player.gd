@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var light_attack_sound: AudioStreamPlayer2D = $LightAttack
+@onready var on_hit_sound: AudioStreamPlayer2D = $OnHit
+@onready var on_block_sound: AudioStreamPlayer2D = $OnBlock
+@onready var dash_sound: AudioStreamPlayer2D = $Dash
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
@@ -55,9 +59,11 @@ func take_damage(amount: int, direction, attacker) -> void:
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
+		on_hit_sound.play()
 		animation_player.play("hurt", 2)
 	else:
 		attacker.block_stun()
+		on_block_sound.play()
 		animation_player.stop()
 		self._start_idle()
 	
@@ -124,11 +130,13 @@ func _start_dash(horizontal, vertical, delta):
 	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
 	animation_player.stop()
+	dash_sound.play()
 	animation_player.play("dash", 2, dash_animation_speed)
 		
 func _start_light_attack():
 	state = States.ATTACKING
 	animation_player.stop()
+	light_attack_sound.play()
 	animation_player.play("light_attack", 2, attack_animation_speed) 
 	
 

@@ -2,7 +2,8 @@ extends Control
 
 @onready var restart_button: Button = $HBoxContainer/Restart
 @onready var quit_button: Button = $HBoxContainer/Quit
-
+@onready var end_track: AudioStreamPlayer2D
+@onready var fight_track: AudioStreamPlayer2D
 
 @onready var label: Label = $Label
 
@@ -11,15 +12,17 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#animation_player.play("RESET")
-	
 	self.hide()
 	restart_button.disabled = true
 	quit_button.disabled = true
 
 
-
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
+	var end_track = get_node("/root/Globals/EndTrack")
+	var fight_track = get_node("/root/Globals/FightTrack")
+	end_track.stop()
+	fight_track.play()
 	get_tree().change_scene_to_file("res://world.tscn")
 	
 
@@ -29,6 +32,8 @@ func _on_quit_pressed() -> void:
 
 func end_game(winner : String)-> void:
 	get_tree().paused = true
+	var end_track = get_node("/root/Globals/EndTrack")
+	end_track.play()
 	label.text = "PLAYER %s WINS!" %winner
 
 	restart_button.disabled = false

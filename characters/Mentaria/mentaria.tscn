@@ -1,9 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdcw5es8mc58l"]
+[gd_scene load_steps=21 format=3 uid="uid://bdcw5es8mc58l"]
 
 [ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_ndga5"]
 [ext_resource type="Texture2D" uid="uid://d0ytpkduw8je3" path="res://characters/Mentaria/mentaria_sprite.png" id="2_0gcko"]
 [ext_resource type="Script" uid="uid://bq6kl2hr2s41d" path="res://HitBox.gd" id="3_0gcko"]
 [ext_resource type="Script" uid="uid://bnpetw7adoobd" path="res://HurtBox.gd" id="4_tux2h"]
+[ext_resource type="AudioStream" uid="uid://bbvovry4hxamr" path="res://sounds/light_attack_no_squish.wav" id="5_qu8sy"]
+[ext_resource type="AudioStream" uid="uid://cx7fgok3j8fhw" path="res://sounds/on_hit.wav" id="6_1wu8p"]
+[ext_resource type="AudioStream" uid="uid://dsobkq57c6v57" path="res://sounds/on_block.wav" id="7_y5yc3"]
+[ext_resource type="AudioStream" uid="uid://b70tntmlnqtbv" path="res://sounds/dash.wav" id="8_qu8sy"]
 
 [sub_resource type="Animation" id="Animation_ndga5"]
 length = 0.001
@@ -334,3 +338,15 @@ metadata/_custom_type_script = "uid://bnpetw7adoobd"
 position = Vector2(0, -19.5652)
 scale = Vector2(3.65043, 3.65638)
 shape = SubResource("CapsuleShape2D_yhjtb")
+
+[node name="LightAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qu8sy")
+
+[node name="OnHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_1wu8p")
+
+[node name="OnBlock" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_y5yc3")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_qu8sy")
