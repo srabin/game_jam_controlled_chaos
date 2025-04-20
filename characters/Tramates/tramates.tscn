@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8o7vw8wbevi2"]
+[gd_scene load_steps=18 format=3 uid="uid://b8o7vw8wbevi2"]
 
 [ext_resource type="Script" uid="uid://cvacjd83gn4fl" path="res://player.gd" id="1_p4iso"]
 [ext_resource type="Texture2D" uid="uid://bfk1nyshpvbel" path="res://characters/Tramates/tramates_sprite_sheet.png" id="2_la2f7"]
@@ -251,6 +251,22 @@ tracks/0/keys = {
 "values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_88mhp"]
+resource_name = "stunned"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0520833, 0.104167, 0.15625, 0.208333, 0.260417),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [132, 133, 134, 132, 133, 134]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_p4iso"),
@@ -260,6 +276,7 @@ _data = {
 &"hurt": SubResource("Animation_f8t7h"),
 &"idle": SubResource("Animation_i3pqv"),
 &"light_attack": SubResource("Animation_51wja"),
+&"stunned": SubResource("Animation_88mhp"),
 &"walk": SubResource("Animation_la2f7")
 }
 

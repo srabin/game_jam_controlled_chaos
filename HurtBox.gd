@@ -16,4 +16,4 @@ func _on_area_entered(hitbox: HitBox) -> void:
 		
 	if owner.has_method("take_damage") and owner != hitbox.owner:
 		var direction = hitbox.owner.position.direction_to(self.owner.position)
-		owner.take_damage(hitbox.damage, direction)
+		owner.take_damage(hitbox.damage, direction, hitbox.owner)

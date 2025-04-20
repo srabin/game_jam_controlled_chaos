@@ -21,7 +21,7 @@ const DASH_SPEED = SPEED * 2.3
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
-const MAX_FALL_TIME = 1.0
+const MAX_FALL_TIME = 1.5
 var inertia = 100.0
 
 # Player State
@@ -32,6 +32,7 @@ var has_attacked: bool
 var has_dashed: bool
 var has_blocked: bool
 var has_hurt: bool
+var has_stunned: bool
 var time_falling: float = 0.0
 var is_falling = false
 var chaos: float = 1.0
@@ -39,9 +40,14 @@ var initial_modulate: Color
 
 var percentage := 0.0
 
-enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD}
+enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD, STUNNED}
 
-func take_damage(amount: int, direction) -> void:
+func block_stun():
+	state = States.STUNNED
+	animation_player.stop()
+	animation_player.play("stunned", 2, 0.4)
+	
+func take_damage(amount: int, direction, attacker) -> void:
 	if not state == States.BLOCKING:
 		if percentage < knockback_limit:
 			percentage += amount
@@ -50,6 +56,10 @@ func take_damage(amount: int, direction) -> void:
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
 		animation_player.play("hurt", 2)
+	else:
+		attacker.block_stun()
+		animation_player.stop()
+		self._start_idle()
 
 func _ready():
 	initial_modulate = sprite.get_modulate()
@@ -77,12 +87,15 @@ func _on_animation_finished(_animation):
 			has_blocked = true 
 		"hurt":
 			has_hurt = true
+		"stunned":
+			has_stunned = true
 
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
 	if (
 		animation_player.current_animation == "idle" 
-		or animation_player.current_animation == "hurt" 
+		or animation_player.current_animation == "hurt"
+		or animation_player.current_animation == "stunned"
 		or not animation_player.is_playing()
 	):
 		animation_player.play("walk")
@@ -123,6 +136,7 @@ func _start_idle():
 	if (
 		animation_player.current_animation == "walk" 
 		or animation_player.current_animation == "hurt" 
+		or animation_player.current_animation == "stunned"
 		or not animation_player.is_playing()
 	):
 		animation_player.play("idle") 
@@ -193,6 +207,10 @@ func _physics_process(delta: float) -> void:
 			if has_hurt:
 				self._start_idle()
 				has_hurt = false
+		States.STUNNED:
+			if has_stunned:
+				self._start_idle()
+				has_stunned = false
 
 
 	
