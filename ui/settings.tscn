@@ -52,14 +52,30 @@ theme = ExtResource("2_pcnwc")
 theme_override_font_sizes/font_size = 32
 text = "Volume:"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainerVolume" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 800
 theme_override_constants/margin_bottom = 25
 
-[node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainerVolume"]
+layout_mode = 2
+
+[node name="ChaosLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_pcnwc")
+theme_override_font_sizes/font_size = 32
+text = "Chaos:"
+
+[node name="MarginContainerChaos" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 800
+theme_override_constants/margin_bottom = 25
+
+[node name="Chaos" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainerChaos"]
 layout_mode = 2
 
 [node name="ReturnButton" type="Button" parent="MarginContainer"]
@@ -70,5 +86,6 @@ theme = ExtResource("2_pcnwc")
 theme_override_font_sizes/font_size = 40
 text = "Return To Main"
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainerVolume/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainerChaos/Chaos" to="." method="_on_chaos_value_changed"]
 [connection signal="pressed" from="MarginContainer/ReturnButton" to="." method="_on_return_button_pressed"]

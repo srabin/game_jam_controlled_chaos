@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var dash_animation_speed : float = 2.0
 @export var block_animation_speed : float = 0.4
 @export var knockback_modifier : int = 10.0
+@export var knockback_limit : int = 180.0
 
 signal player_lost
 
@@ -23,6 +24,8 @@ const MAX_FALL_TIME = 1.0
 var inertia = 100.0
 
 # Player State
+var player_speed: float = SPEED
+var player_dash_speed: float = DASH_SPEED
 var state: States = States.IDLE
 var has_attacked: bool
 var has_dashed: bool
@@ -30,6 +33,7 @@ var has_blocked: bool
 var has_hurt: bool
 var time_falling: float = 0.0
 var is_falling = false
+var chaos: float = 1.0
 
 var percentage := 0.0
 
@@ -37,7 +41,8 @@ enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD}
 
 func take_damage(amount: int, direction) -> void:
 	if not state == States.BLOCKING:
-		percentage += amount
+		if percentage < knockback_limit:
+			percentage += amount
 		state = States.HURTING
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
@@ -45,7 +50,12 @@ func take_damage(amount: int, direction) -> void:
 		animation_player.play("hurt", 2)
 		animation_player.animation_finished.connect(_on_animation_finished)
 
-
+func _ready():
+	var global_scene = get_node("/root/Globals")
+	self.chaos = global_scene.chaos + 1.0
+	self.player_speed = SPEED * (1.0 + (chaos*2.0/100.0))
+	self.player_dash_speed = DASH_SPEED * (1.0 + (chaos*0.5/100.0))
+	self.attack_animation_speed *= (1.0 + (chaos*0.5/100.0))
 	
 func _process(delta: float) -> void:
 	var direction = Input.get_vector("look_left_" + str(player_id), "look_right_" + str(player_id), "look_up_" + str(player_id), "look_down_" + str(player_id))
@@ -67,10 +77,14 @@ func _on_animation_finished(_animation):
 			
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
-	if animation_player.current_animation == "idle" or not animation_player.is_playing():
+	if (
+		animation_player.current_animation == "idle" 
+		or animation_player.current_animation == "hurt" 
+		or not animation_player.is_playing()
+	):
 		animation_player.play("walk")
-	velocity.x = move_toward(velocity.x, horizontal * SPEED, ACCELLERATION_RATE)
-	velocity.y = move_toward(velocity.y, vertical * SPEED, ACCELLERATION_RATE)
+	velocity.x = move_toward(velocity.x, horizontal * player_speed, ACCELLERATION_RATE)
+	velocity.y = move_toward(velocity.y, vertical * player_speed, ACCELLERATION_RATE)
 
 func _start_block():
 	state = States.BLOCKING
@@ -89,8 +103,8 @@ func _start_dash(horizontal, vertical, dash, delta):
 		rotation = global_transform.get_rotation()
 		direction = Vector2(0, 1).rotated(rotation)
 
-	velocity.x = direction.normalized().x * DASH_SPEED
-	velocity.y = direction.normalized().y * DASH_SPEED
+	velocity.x = direction.normalized().x * player_dash_speed
+	velocity.y = direction.normalized().y * player_dash_speed
 	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
 	animation_player.stop()
@@ -106,7 +120,11 @@ func _start_light_attack():
 
 func _start_idle():
 	state = States.IDLE
-	if animation_player.current_animation == "walk" or not animation_player.is_playing():
+	if (
+		animation_player.current_animation == "walk" 
+		or animation_player.current_animation == "hurt" 
+		or not animation_player.is_playing()
+	):
 		animation_player.play("idle") 
 
 	
