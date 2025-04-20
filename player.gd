@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var dash_animation_speed : float = 2.0
 @export var block_animation_speed : float = 0.4
 @export var knockback_modifier : int = 10.0
+@export var knockback_limit : int = 180.0
 
 signal player_lost
 
@@ -40,7 +41,8 @@ enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD}
 
 func take_damage(amount: int, direction) -> void:
 	if not state == States.BLOCKING:
-		percentage += amount
+		if percentage < knockback_limit:
+			percentage += amount
 		state = States.HURTING
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
@@ -75,7 +77,11 @@ func _on_animation_finished(_animation):
 			
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
-	if animation_player.current_animation == "idle" or not animation_player.is_playing():
+	if (
+		animation_player.current_animation == "idle" 
+		or animation_player.current_animation == "hurt" 
+		or not animation_player.is_playing()
+	):
 		animation_player.play("walk")
 	velocity.x = move_toward(velocity.x, horizontal * player_speed, ACCELLERATION_RATE)
 	velocity.y = move_toward(velocity.y, vertical * player_speed, ACCELLERATION_RATE)
@@ -114,7 +120,11 @@ func _start_light_attack():
 
 func _start_idle():
 	state = States.IDLE
-	if animation_player.current_animation == "walk" or not animation_player.is_playing():
+	if (
+		animation_player.current_animation == "walk" 
+		or animation_player.current_animation == "hurt" 
+		or not animation_player.is_playing()
+	):
 		animation_player.play("idle") 
 
 	
