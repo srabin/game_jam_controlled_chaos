@@ -33,12 +33,6 @@ func _ready() -> void:
 	fight_track.name = "FightTrack"
 	add_child(fight_track)
 	
-	end_track = AudioStreamPlayer.new()
-	var end_track_stream = load("res://sounds/end_track.wav")
-	end_track.set_stream(end_track_stream)
-	end_track.name = "EndTrack"
-	add_child(end_track)
-	
 	
 
 

@@ -1,9 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd3j4b3pgy7ig"]
+[gd_scene load_steps=8 format=3 uid="uid://cd3j4b3pgy7ig"]
 
 [ext_resource type="Script" uid="uid://dfgj46jypn0x6" path="res://ui/end_screen.gd" id="1_7ibj4"]
+[ext_resource type="Script" uid="uid://ecwy5slfr0y7" path="res://addons/audio_manager/audio_manager.gd" id="3_7ibj4"]
 [ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="3_cp4qi"]
+[ext_resource type="Script" uid="uid://5dnaklnhgv2l" path="res://addons/audio_manager/audio_manager_2d.gd" id="4_cp4qi"]
+[ext_resource type="AudioStream" uid="uid://d30a5ev23o8pp" path="res://sounds/end_track.wav" id="5_box58"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
+
+[sub_resource type="Resource" id="Resource_d1do1"]
+script = ExtResource("4_cp4qi")
+audio_name = "end_track"
+audio_stream = ExtResource("5_box58")
+use_clipper = false
+start_time = 0.0
+end_time = 0.0
+volume_db = 8.0
+pitch_scale = 1.0
+max_distance = 2000.0
+loop = true
+loop_offset = 0.0
+fade_time = 32.0
+auto_play = false
+max_polyphony = 1
+panning_strength = 1.0
+area_mask = 1
+bus = &"Master"
+playback_type = 0
+attenuation = 1.0
+metadata/_custom_type_script = "uid://5dnaklnhgv2l"
 
 [node name="EndScreen" type="Control"]
 process_mode = 3
@@ -72,6 +97,11 @@ theme = ExtResource("3_cp4qi")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 alignment = 0
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3_7ibj4")
+audios_2d = Array[ExtResource("4_cp4qi")]([SubResource("Resource_d1do1")])
+metadata/_custom_type_script = "uid://ecwy5slfr0y7"
 
 [connection signal="pressed" from="HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

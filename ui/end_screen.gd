@@ -2,7 +2,7 @@ extends Control
 
 @onready var restart_button: Button = $HBoxContainer/Restart
 @onready var quit_button: Button = $HBoxContainer/Quit
-@onready var end_track: AudioStreamPlayer2D
+@onready var audio_manager: AudioManager = $AudioManager
 @onready var fight_track: AudioStreamPlayer2D
 
 @onready var label: Label = $Label
@@ -16,15 +16,15 @@ func _ready() -> void:
 	restart_button.disabled = true
 	quit_button.disabled = true
 
+func _on_end_track_finished():
+	fight_track.play()
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	var end_track = get_node("/root/Globals/EndTrack")
 	var fight_track = get_node("/root/Globals/FightTrack")
-	end_track.stop()
 	fight_track.play()
 	get_tree().change_scene_to_file("res://world.tscn")
-	
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
@@ -32,8 +32,8 @@ func _on_quit_pressed() -> void:
 
 func end_game(winner : String)-> void:
 	get_tree().paused = true
-	var end_track = get_node("/root/Globals/EndTrack")
-	end_track.play()
+	var end_track = audio_manager.get_audio_2d("end_track")
+	audio_manager.play_audio_2d("end_track")
 	label.text = "PLAYER %s WINS!" %winner
 
 	restart_button.disabled = false
