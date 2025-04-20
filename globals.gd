@@ -4,6 +4,7 @@ var select_beep: AudioStreamPlayer
 var select_click: AudioStreamPlayer
 var title_track: AudioStreamPlayer
 var fight_track: AudioStreamPlayer
+var end_track: AudioStreamPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,13 @@ func _ready() -> void:
 	fight_track.set_stream(fight_track_stream)
 	fight_track.name = "FightTrack"
 	add_child(fight_track)
+	
+	end_track = AudioStreamPlayer.new()
+	var end_track_stream = load("res://sounds/end_track.wav")
+	end_track.set_stream(end_track_stream)
+	end_track.name = "EndTrack"
+	add_child(end_track)
+	
 	
 
 
