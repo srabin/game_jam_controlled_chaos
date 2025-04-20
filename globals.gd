@@ -10,8 +10,9 @@ var end_track: AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	select_beep = AudioStreamPlayer.new()
-	var select_beep_stream = load("res://sounds/select_beep.wav")
+	var select_beep_stream = load("res://sounds/select_click.wav")
 	select_beep.set_stream(select_beep_stream)
+	select_beep.pitch_scale = 0.75
 	select_beep.name = "SelectBeep"
 	add_child(select_beep)
 	

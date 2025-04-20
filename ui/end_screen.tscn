@@ -103,5 +103,7 @@ script = ExtResource("3_7ibj4")
 audios_2d = Array[ExtResource("4_cp4qi")]([SubResource("Resource_d1do1")])
 metadata/_custom_type_script = "uid://ecwy5slfr0y7"
 
+[connection signal="mouse_entered" from="HBoxContainer/Restart" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Quit" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

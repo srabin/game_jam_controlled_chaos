@@ -3,6 +3,7 @@ extends Control
 @onready var resume_button: Button = $PanelContainer/VBoxContainer/Resume
 @onready var title_screen_button: Button = $"PanelContainer/VBoxContainer/Title Screen"
 @onready var quit_button: Button = $PanelContainer/VBoxContainer/Quit
+var global_scene 
 
 var is_paused = false
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	resume_button.disabled = true
 	title_screen_button.disabled = true
 	quit_button.disabled = true
+	global_scene = get_node("/root/Globals")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,17 +30,21 @@ func _process(delta: float) -> void:
 
 
 func _on_resume_pressed() -> void:
+	global_scene.get_node("SelectBeep").play()
 	resume()
 
 
 
 func _on_title_screen_pressed() -> void:
+	global_scene.get_node("SelectBeep").play()
+	global_scene.get_node("FightTrack").stop()
 	resume()
 	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
 
 
 
 func _on_quit_pressed() -> void:
+	global_scene.get_node("SelectBeep").play()
 	get_tree().quit()
 
 func pause() -> void:
@@ -65,3 +71,7 @@ func _on_pause_button_pressed() -> void:
 	else:
 		is_paused = true
 		pause()
+		
+func _on_mouse_entered() -> void:
+	if is_paused:
+		global_scene.get_node("SelectClick").play()
