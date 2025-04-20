@@ -34,13 +34,11 @@ func _on_resume_pressed() -> void:
 
 
 func _on_title_screen_pressed() -> void:
-	print("pause titles")
-	get_tree().change_scene_to_file("res://title_screen.tscn")
+	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
 
 
 
 func _on_quit_pressed() -> void:
-	print("pause quit")
 	get_tree().quit()
 
 func pause() -> void:
