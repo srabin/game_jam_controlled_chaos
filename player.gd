@@ -77,13 +77,6 @@ func _on_animation_finished(_animation):
 			has_blocked = true 
 		"hurt":
 			has_hurt = true
-			
-#func _on_fall_color_timer_timeout() -> void:
-	#if is_falling:
-		#if sprite.get_modulate() == initial_modulate:
-			#sprite.modulate = Color.DARK_ORCHID
-		#else:
-			#sprite.modulate = initial_modulate
 
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
@@ -146,7 +139,6 @@ func _physics_process(delta: float) -> void:
 	var block = Input.is_action_just_pressed("block_" + str(player_id))
 	
 	if is_falling == true:
-		#fall_color_timer.start()
 		sprite.modulate = Color.DARK_ORCHID
 		time_falling += delta
 	else:
