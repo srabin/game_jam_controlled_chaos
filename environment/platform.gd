@@ -1,12 +1,13 @@
 extends Area2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var timer: Timer = $Timer
 
-var order_of_animations = ["big", "medium", "small"]
+var order_of_animations = ["medium", "small"]
 var cur_animation = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
