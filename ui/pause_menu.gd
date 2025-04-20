@@ -33,6 +33,7 @@ func _on_resume_pressed() -> void:
 
 
 func _on_title_screen_pressed() -> void:
+	resume()
 	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
 
 

@@ -228,6 +228,22 @@ tracks/3/keys = {
 "values": [true, true, false, true, true, true]
 }
 
+[sub_resource type="Animation" id="Animation_11jcd"]
+resource_name = "stunned"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0520833, 0.104167, 0.15625, 0.208333, 0.260417),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [107, 108, 109, 108, 109, 110]
+}
+
 [sub_resource type="Animation" id="Animation_3ilpj"]
 resource_name = "walk"
 length = 0.4
@@ -243,22 +259,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
-}
-
-[sub_resource type="Animation" id="Animation_11jcd"]
-resource_name = "stunned"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0520833, 0.104167, 0.15625, 0.208333, 0.260417),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [107, 108, 109, 108, 109, 110]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ilpj"]
