@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=11 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_gbfbk"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cd3j4b3pgy7ig" path="res://ui/end_screen.tscn" id="6_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://c1e000envgrbh" path="res://ui/pause_menu.tscn" id="6_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://dv43txoddtd5l" path="res://ui/loading_screen.tscn" id="8_ioo17"]
+[ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="9_ioo17"]
+[ext_resource type="Script" uid="uid://bft0vxu5err27" path="res://percentage_display.gd" id="9_wse8f"]
 
 [node name="World" type="Node2D"]
 
@@ -109,7 +111,70 @@ scale = Vector2(94.6492, 58.0226)
 layout_mode = 1
 
 [node name="PercentageDisplay" type="CanvasLayer" parent="."]
-layer = 3
+layer = 0
+script = ExtResource("9_wse8f")
+
+[node name="MarginContainer" type="MarginContainer" parent="PercentageDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PercentageDisplay/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 700
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PercentageDisplay/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PlayerOneLabel" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("9_ioo17")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.919281, 4.47616e-06, 1.15514e-06, 1)
+theme_override_font_sizes/font_size = 30
+text = "Player One:"
+
+[node name="PlayerOne" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("9_ioo17")
+theme_override_colors/font_color = Color(1, 0.819608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 50
+text = "0.0%"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PercentageDisplay/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PlayerTwoLabel" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("9_ioo17")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.635294, 1)
+theme_override_font_sizes/font_size = 30
+text = "Player Two:"
+
+[node name="PlayerTwo" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("9_ioo17")
+theme_override_colors/font_color = Color(0.541176, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.635294, 1)
+theme_override_font_sizes/font_size = 50
+text = "0.0%"
 
 [connection signal="body_entered" from="Platform" to="Tramates" method="_on_platform_body_entered"]
 [connection signal="body_exited" from="Platform" to="Tramates" method="_on_platform_body_exited"]
