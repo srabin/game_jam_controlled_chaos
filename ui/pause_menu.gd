@@ -6,16 +6,19 @@ extends Control
 
 var is_paused = false
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animation_player.play("RESET")
-	resume_button.disabled = false
-	title_screen_button.disabled = false
-	quit_button.disabled = false
+	resume_button.disabled = true
+	title_screen_button.disabled = true
+	quit_button.disabled = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+		
 	if Input.is_action_just_pressed("pause"):
 		if is_paused:
 			is_paused = false
@@ -31,11 +34,13 @@ func _on_resume_pressed() -> void:
 
 
 func _on_title_screen_pressed() -> void:
+	print("pause titles")
 	get_tree().change_scene_to_file("res://title_screen.tscn")
 
 
 
 func _on_quit_pressed() -> void:
+	print("pause quit")
 	get_tree().quit()
 
 func pause() -> void:

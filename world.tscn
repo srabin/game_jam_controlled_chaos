@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bupbdiq2fg36y"]
+[gd_scene load_steps=9 format=3 uid="uid://bupbdiq2fg36y"]
 
 [ext_resource type="PackedScene" uid="uid://b8o7vw8wbevi2" path="res://characters/Tramates/tramates.tscn" id="1_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://b04g8hrnu2d7l" path="res://environment/assets/MushroomMapBg2.png" id="2_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bdcw5es8mc58l" path="res://characters/Mentaria/mentaria.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://4lxgn82ro8tp" path="res://camera_2d.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://dxvswjrk6i6ag" path="res://environment/platform.tscn" id="5_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://cd3j4b3pgy7ig" path="res://ui/end_screen.tscn" id="6_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://c1e000envgrbh" path="res://ui/pause_menu.tscn" id="6_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://dv43txoddtd5l" path="res://ui/loading_screen.tscn" id="8_ioo17"]
 
@@ -74,6 +75,11 @@ block_animation_speed = 4.25
 
 [node name="Camera2D" parent="." instance=ExtResource("5_036b0")]
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="EndScreen" parent="CanvasLayer2" instance=ExtResource("6_gbfbk")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_pkg7o")]
@@ -102,6 +108,11 @@ scale = Vector2(94.6492, 58.0226)
 [node name="LoadingScreen" parent="UI" instance=ExtResource("8_ioo17")]
 layout_mode = 1
 
+[node name="PercentageDisplay" type="CanvasLayer" parent="."]
+layer = 3
+
 [connection signal="body_entered" from="Platform" to="Tramates" method="_on_platform_body_entered"]
 [connection signal="body_exited" from="Platform" to="Tramates" method="_on_platform_body_exited"]
+[connection signal="player_lost" from="Tramates" to="CanvasLayer2/EndScreen" method="_on_tramates_player_lost"]
+[connection signal="player_lost" from="Mentaria" to="CanvasLayer2/EndScreen" method="_on_mentaria_player_lost"]
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PauseMenu" method="_on_pause_button_pressed"]

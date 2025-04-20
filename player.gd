@@ -9,6 +9,8 @@ extends CharacterBody2D
 @export var block_animation_speed : float = 0.4
 @export var knockback_modifier : int = 10.0
 
+signal player_lost
+
 # Player Movement
 var move_input := Vector2.ZERO
 
@@ -194,3 +196,7 @@ func _on_platform_body_exited(body: Node2D) -> void:
 
 func _on_platform_body_entered(body: Node2D) -> void:
 	body.is_falling = false
+
+func end_game() -> void:
+	self.player_lost.emit()
+	
