@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxvswjrk6i6ag"]
+[gd_scene load_steps=10 format=3 uid="uid://dxvswjrk6i6ag"]
 
 [ext_resource type="Script" uid="uid://der743x3seahb" path="res://environment/platform.gd" id="1_s8bxr"]
 [ext_resource type="Texture2D" uid="uid://dxk6dvmos5855" path="res://environment/assets/MushroomMap 10.png" id="2_570mj"]
+[ext_resource type="AudioStream" uid="uid://bgjifuoif1wvv" path="res://sounds/stage_crumble.wav" id="3_l7dh2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
 size = Vector2(9.20745, 3.69591)
@@ -160,5 +161,9 @@ libraries = {
 wait_time = 50.0
 autostart = true
 ignore_time_scale = true
+
+[node name="StageCrumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l7dh2")
+pitch_scale = 2.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
