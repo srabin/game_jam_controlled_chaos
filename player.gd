@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite2D = $Sprite2D
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
 @export var attack_animation_speed : float = 2.0
 @export var dash_animation_speed : float = 2.0
 @export var block_animation_speed : float = 0.4
-@export var knockback_modifier : int = 10.0
-@export var knockback_limit : int = 180.0
+@export var knockback_modifier : float = 10.0
+@export var knockback_limit : float = 180.0
 
 signal player_lost
 
@@ -20,7 +21,7 @@ const DASH_SPEED = SPEED * 2.3
 const DECELERATION_RATE = SPEED * 0.04
 const ACCELLERATION_RATE = SPEED * 0.12
 const BOUNCE_STRENGTH = 0.7	
-const MAX_FALL_TIME = 1.0
+const MAX_FALL_TIME = 1.5
 var inertia = 100.0
 
 # Player State
@@ -31,15 +32,22 @@ var has_attacked: bool
 var has_dashed: bool
 var has_blocked: bool
 var has_hurt: bool
+var has_stunned: bool
 var time_falling: float = 0.0
 var is_falling = false
 var chaos: float = 1.0
+var initial_modulate: Color
 
 var percentage := 0.0
 
-enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD}
+enum States {IDLE, DASHING, MOVING, HURTING, ATTACKING, BLOCKING, DEAD, STUNNED}
 
-func take_damage(amount: int, direction) -> void:
+func block_stun():
+	state = States.STUNNED
+	animation_player.stop()
+	animation_player.play("stunned", 2, 0.4)
+	
+func take_damage(amount: int, direction, attacker) -> void:
 	if not state == States.BLOCKING:
 		if percentage < knockback_limit:
 			percentage += amount
@@ -48,9 +56,14 @@ func take_damage(amount: int, direction) -> void:
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
 		animation_player.play("hurt", 2)
-		animation_player.animation_finished.connect(_on_animation_finished)
+	else:
+		attacker.block_stun()
+		animation_player.stop()
+		self._start_idle()
 
 func _ready():
+	initial_modulate = sprite.get_modulate()
+	animation_player.animation_finished.connect(_on_animation_finished)
 	var global_scene = get_node("/root/Globals")
 	self.chaos = global_scene.chaos + 1.0
 	self.player_speed = SPEED * (1.0 + (chaos*2.0/100.0))
@@ -74,12 +87,15 @@ func _on_animation_finished(_animation):
 			has_blocked = true 
 		"hurt":
 			has_hurt = true
-			
+		"stunned":
+			has_stunned = true
+
 func _start_move(horizontal, vertical, delta):
 	state = States.MOVING
 	if (
 		animation_player.current_animation == "idle" 
-		or animation_player.current_animation == "hurt" 
+		or animation_player.current_animation == "hurt"
+		or animation_player.current_animation == "stunned"
 		or not animation_player.is_playing()
 	):
 		animation_player.play("walk")
@@ -90,10 +106,9 @@ func _start_block():
 	state = States.BLOCKING
 	animation_player.stop()
 	animation_player.play("block", 2, block_animation_speed)
-	animation_player.animation_finished.connect(_on_animation_finished)
 
 	
-func _start_dash(horizontal, vertical, dash, delta):
+func _start_dash(horizontal, vertical, delta):
 	state = States.DASHING	
 	var direction = Vector2()
 	if horizontal or vertical:
@@ -109,13 +124,11 @@ func _start_dash(horizontal, vertical, dash, delta):
 	
 	animation_player.stop()
 	animation_player.play("dash", 2, dash_animation_speed)
-	animation_player.animation_finished.connect(_on_animation_finished)
 		
 func _start_light_attack():
 	state = States.ATTACKING
 	animation_player.stop()
 	animation_player.play("light_attack", 2, attack_animation_speed) 
-	animation_player.animation_finished.connect(_on_animation_finished)
 	
 
 func _start_idle():
@@ -123,6 +136,7 @@ func _start_idle():
 	if (
 		animation_player.current_animation == "walk" 
 		or animation_player.current_animation == "hurt" 
+		or animation_player.current_animation == "stunned"
 		or not animation_player.is_playing()
 	):
 		animation_player.play("idle") 
@@ -139,8 +153,10 @@ func _physics_process(delta: float) -> void:
 	var block = Input.is_action_just_pressed("block_" + str(player_id))
 	
 	if is_falling == true:
+		sprite.modulate = Color.DARK_ORCHID
 		time_falling += delta
 	else:
+		sprite.modulate = initial_modulate
 		time_falling = 0.0
 		
 	#STATE = DEAD
@@ -155,7 +171,7 @@ func _physics_process(delta: float) -> void:
 			if horizontal or vertical:
 				self._start_move(horizontal, vertical, delta)
 			if dash:
-				self._start_dash(horizontal, vertical, dash, delta)
+				self._start_dash(horizontal, vertical, delta)
 			if light_attack:
 				self._start_light_attack()
 			if block:
@@ -166,7 +182,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				self._start_idle()
 			if dash:
-				self._start_dash(horizontal, vertical, dash, delta)
+				self._start_dash(horizontal, vertical, delta)
 			if light_attack:
 				self._start_light_attack()
 			if block:
@@ -191,6 +207,10 @@ func _physics_process(delta: float) -> void:
 			if has_hurt:
 				self._start_idle()
 				has_hurt = false
+		States.STUNNED:
+			if has_stunned:
+				self._start_idle()
+				has_stunned = false
 
 
 	
@@ -198,7 +218,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y = move_toward(velocity.y, 0, DECELERATION_RATE)
 	
 	# save the velocity from before move_and_slide finishes to use for the bounce
-	var initial_velocity = velocity
+	#var initial_velocity = velocity
 	
 	move_and_slide()
 	
@@ -217,4 +237,3 @@ func _on_platform_body_entered(body: Node2D) -> void:
 
 func end_game() -> void:
 	self.player_lost.emit()
-	
