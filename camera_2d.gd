@@ -10,11 +10,10 @@ func _ready() -> void:
 	
 	#TODO: tweak 500, as well as the upper/lower bounds of the zoomfactor
 	var max_zoom_factor = 300/max(zoom_factor_x, zoom_factor_y) 
-#
-	##print((max_zoom_factor))
 	var zoom_factor = clamp(max_zoom_factor, 0.5, 1.7)
-#
 	self.zoom = Vector2(zoom_factor, zoom_factor)
+	
+	
 func _process(delta):
 	# Set camera position to be the center between the two players! 
 	self.global_position = (tramates.global_position + mentaria.global_position) * 0.5
@@ -24,10 +23,7 @@ func _process(delta):
 	
 	#TODO: tweak 500, as well as the upper/lower bounds of the zoomfactor
 	var max_zoom_factor = 300/max(zoom_factor_x, zoom_factor_y) 
-#
-	##print((max_zoom_factor))
 	var zoom_factor = clamp(max_zoom_factor, 0.5, 1.7)
-#
 	self.zoom = Vector2(zoom_factor, zoom_factor)
 	
 	

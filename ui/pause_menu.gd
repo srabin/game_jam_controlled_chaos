@@ -60,10 +60,8 @@ func resume() -> void:
 
 func _on_pause_button_pressed() -> void:
 	if is_paused:
-		print("yahoo")
 		is_paused = false
 		resume()
 	else:
-		print("yohoo")
 		is_paused = true
 		pause()
