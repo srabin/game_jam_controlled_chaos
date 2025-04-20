@@ -33,6 +33,7 @@ func _on_resume_pressed() -> void:
 
 
 func _on_title_screen_pressed() -> void:
+	resume()
 	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
 
 
@@ -59,10 +60,8 @@ func resume() -> void:
 
 func _on_pause_button_pressed() -> void:
 	if is_paused:
-		print("yahoo")
 		is_paused = false
 		resume()
 	else:
-		print("yohoo")
 		is_paused = true
 		pause()

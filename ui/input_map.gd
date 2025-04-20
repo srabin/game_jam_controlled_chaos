@@ -11,10 +11,6 @@ func _ready() -> void:
 	update_text()
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#print("yeah?")
-	#set_process_unhandled_input(false)
 
 func _toggled(button_pressed) -> void:
 	set_process_unhandled_input(button_pressed)
@@ -40,10 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 		
 func update_text()-> void:
-	#print(action)
 	var events = InputMap.action_get_events(action)
-	print(action)
-	print(events)
 	for input_pressed in events:
 		
 		if (input_pressed is not InputEventJoypadButton) and (input_pressed is not InputEventJoypadMotion):
