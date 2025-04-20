@@ -303,13 +303,14 @@ radius = 32.0
 script = ExtResource("1_p4iso")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
 texture = ExtResource("2_la2f7")
 hframes = 26
 vframes = 6
 frame = 78
 
 [node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, -30)
 scale = Vector2(2.4, 2.4)
 shape = SubResource("CircleShape2D_la2f7")
 
@@ -320,7 +321,8 @@ libraries = {
 autoplay = "idle"
 
 [node name="HitBox" type="Area2D" parent="."]
-scale = Vector2(2, 2)
+position = Vector2(0, -30)
+scale = Vector2(2.2, 2.2)
 script = ExtResource("3_la2f7")
 metadata/_custom_type_script = "uid://bq6kl2hr2s41d"
 
@@ -332,6 +334,7 @@ disabled = true
 debug_color = Color(0.991423, 0, 0.265756, 0.42)
 
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -30)
 scale = Vector2(2.54649, 2.79961)
 script = ExtResource("4_7phrs")
 metadata/_custom_type_script = "uid://bnpetw7adoobd"
