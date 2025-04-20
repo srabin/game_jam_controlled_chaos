@@ -107,7 +107,7 @@ func _start_light_attack():
 func _start_idle():
 	state = States.IDLE
 	if animation_player.current_animation == "walk" or not animation_player.is_playing():
-		animation_player.play("idle")
+		animation_player.play("idle") 
 
 	
 func _physics_process(delta: float) -> void:	

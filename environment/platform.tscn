@@ -157,7 +157,8 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 29.018
+wait_time = 50.0
 autostart = true
+ignore_time_scale = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
