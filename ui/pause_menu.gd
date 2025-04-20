@@ -21,11 +21,10 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("pause"):
 		if is_paused:
-			is_paused = false
 			resume()
 		else:
-			is_paused = true
 			pause()
+			
 
 
 func _on_resume_pressed() -> void:
@@ -42,6 +41,7 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func pause() -> void:
+	is_paused = true
 	get_tree().paused = true
 	animation_player.play("blur")
 	resume_button.disabled = false
@@ -49,6 +49,7 @@ func pause() -> void:
 	quit_button.disabled = false
 	
 func resume() -> void:
+	is_paused = false
 	get_tree().paused = false
 	animation_player.play_backwards("blur")
 	resume_button.disabled = true

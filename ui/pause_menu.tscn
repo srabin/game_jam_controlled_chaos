@@ -104,9 +104,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer"]
-visible = false
 layout_mode = 2
-color = Color(0.468918, 0.248004, 0.356911, 1)
+color = Color(0.470588, 0.247059, 0.356863, 0.470588)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -117,7 +116,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("3_fob5h")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 60
 text = "Pause Menu"
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
