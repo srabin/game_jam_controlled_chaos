@@ -88,6 +88,9 @@ theme = ExtResource("2_pcnwc")
 theme_override_font_sizes/font_size = 40
 text = "Return To Main"
 
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MarginContainerVolume/Volume" to="." method="_on_mouse_entered"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainerVolume/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MarginContainerChaos/Chaos" to="." method="_on_mouse_entered"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainerChaos/Chaos" to="." method="_on_chaos_value_changed"]
+[connection signal="mouse_entered" from="MarginContainer/ReturnButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/ReturnButton" to="." method="_on_return_button_pressed"]

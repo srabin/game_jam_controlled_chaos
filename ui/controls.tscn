@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="1_ewaii"]
 [ext_resource type="Script" uid="uid://ctiwmrxpoed3o" path="res://ui/controls.gd" id="1_ob35n"]
-[ext_resource type="Script" uid="uid://clynu5uhdpots" path="res://ui/input_map.gd" id="2_3bxso"]
+[ext_resource type="Script" path="res://ui/input_map.gd" id="2_3bxso"]
 
 [node name="Controls" type="Control"]
 layout_mode = 3
@@ -389,4 +389,5 @@ theme = ExtResource("1_ewaii")
 theme_override_font_sizes/font_size = 40
 text = "Return To Main"
 
+[connection signal="mouse_entered" from="ReturnButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

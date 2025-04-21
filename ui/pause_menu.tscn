@@ -142,6 +142,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_nwcfo")
 }
 
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Title Screen" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -20,4 +20,8 @@ func _on_chaos_value_changed(value: float) -> void:
 
 
 func _on_return_button_pressed() -> void:
+	global_scene.get_node("SelectBeep").play()
 	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
+	
+func _on_mouse_entered() -> void:
+	global_scene.get_node("SelectClick").play()
