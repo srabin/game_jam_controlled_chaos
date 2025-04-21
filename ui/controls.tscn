@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b14nn8m5kk2vx" path="res://ui/base_theme.tres" id="1_ewaii"]
 [ext_resource type="Script" uid="uid://ctiwmrxpoed3o" path="res://ui/controls.gd" id="1_ob35n"]
-[ext_resource type="Script" path="res://ui/input_map.gd" id="2_3bxso"]
+[ext_resource type="Script" uid="uid://clynu5uhdpots" path="res://ui/input_map.gd" id="2_3bxso"]
 
 [node name="Controls" type="Control"]
 layout_mode = 3
@@ -38,12 +38,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 180
+theme_override_constants/margin_top = 200
 theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 150
+theme_override_constants/separation = 120
 alignment = 1
 
 [node name="Player1" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -156,19 +156,6 @@ layout_mode = 2
 script = ExtResource("2_3bxso")
 action = "light_attack_0"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player1"]
-layout_mode = 2
-
-[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Face Direction:"
-
-[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Player1/HBoxContainer"]
-process_mode = 3
-layout_mode = 2
-text = "Cursor"
-
 [node name="Player2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -279,19 +266,6 @@ layout_mode = 2
 script = ExtResource("2_3bxso")
 action = "light_attack_1"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Player2"]
-layout_mode = 2
-
-[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Face Direction:"
-
-[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Player2/HBoxContainer"]
-process_mode = 3
-layout_mode = 2
-text = "Cursor"
-
 [node name="Controller" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -360,27 +334,13 @@ layout_mode = 2
 disabled = true
 text = "Right Shoulder (R1, RB)"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Controller"]
-layout_mode = 2
-
-[node name="LookLabel" type="Label" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Face Direction:"
-
-[node name="LookButton" type="Button" parent="MarginContainer/HBoxContainer/Controller/HBoxContainer"]
-process_mode = 3
-layout_mode = 2
-disabled = true
-text = "Right Stick"
-
 [node name="ReturnButton" type="Button" parent="."]
 process_mode = 3
 layout_mode = 2
 offset_left = 447.0
-offset_top = 640.0
+offset_top = 628.0
 offset_right = 833.0
-offset_bottom = 700.0
+offset_bottom = 688.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
