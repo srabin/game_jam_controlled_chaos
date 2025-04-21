@@ -413,12 +413,16 @@ shape = SubResource("CapsuleShape2D_yhjtb")
 
 [node name="LightAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_qu8sy")
+bus = &"SFX"
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_1wu8p")
+bus = &"SFX"
 
 [node name="OnBlock" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_y5yc3")
+bus = &"SFX"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_qu8sy")
+bus = &"SFX"

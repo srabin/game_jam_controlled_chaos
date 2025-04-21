@@ -422,12 +422,16 @@ debug_color = Color(0.608517, 0.538005, 0.115045, 0.42)
 
 [node name="LightAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_6bi6c")
+bus = &"SFX"
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_8c21g")
+bus = &"SFX"
 
 [node name="OnBlock" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_f8t7h")
+bus = &"SFX"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_6bi6c")
+bus = &"SFX"
