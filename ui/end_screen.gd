@@ -18,9 +18,6 @@ func _ready() -> void:
 	quit_button.disabled = true
 	global_scene = get_node("/root/Globals")
 
-func _on_end_track_finished():
-	fight_track.play()
-
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	var end_track = get_node("/root/Globals/EndTrack")
@@ -43,10 +40,8 @@ func end_game(winner : String)-> void:
 	self.show()
 
 
-
 func _on_mentaria_player_lost() -> void:
 	end_game("ONE")
-
 
 
 func _on_tramates_player_lost() -> void:

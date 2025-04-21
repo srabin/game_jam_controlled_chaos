@@ -6,6 +6,11 @@ var title_track: AudioStreamPlayer
 var fight_track: AudioStreamPlayer
 var end_track: AudioStreamPlayer
 
+func _on_fight_track_finished():
+	fight_track.play(100.063)
+
+func _on_title_track_finished():
+	title_track.play()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,12 +31,14 @@ func _ready() -> void:
 	var title_track_stream = load("res://sounds/title_track.wav")
 	title_track.set_stream(title_track_stream)
 	title_track.name = "TitleTrack"
+	title_track.finished.connect(_on_title_track_finished)
 	add_child(title_track)
 	
 	fight_track = AudioStreamPlayer.new()
 	var fight_track_stream = load("res://sounds/fight_track.wav")
 	fight_track.set_stream(fight_track_stream)
 	fight_track.name = "FightTrack"
+	fight_track.finished.connect(_on_fight_track_finished)
 	add_child(fight_track)
 	
 	

@@ -51,6 +51,12 @@ func _ready() -> void:
 	_init_audios_3d()
 	pass
 
+func playing_audio_2d(audio_name: String) -> bool:
+	var audio = _validate_audio_2d(audio_name)
+	if not audio:
+		return false
+	else:
+		return audio.playing
 
 ## Play audio Omni by name
 func play_audio_omni(audio_name: String) -> void:
@@ -78,12 +84,14 @@ func play_audio_omni(audio_name: String) -> void:
 ## Play audio 2D by name
 func play_audio_2d(audio_name: String) -> void:
 	var audio = _validate_audio_2d(audio_name)
+	
 	if not audio:
 		return
-		
+
 	if not audio.is_inside_tree():
 		return
-		
+
+	
 	if float(audio.duration) <= 0.0:
 		return
 
@@ -94,7 +102,7 @@ func play_audio_2d(audio_name: String) -> void:
 		audio.play(audio.start_time)
 	else:
 		audio.play()
-
+	
 	timer.start()
 	fade_timer.start()
 	pass

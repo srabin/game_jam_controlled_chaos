@@ -79,10 +79,8 @@ func _ready():
 	self.block_animation_speed *= (1.0 + (chaos*0.5/100))
 	
 func _process(delta: float) -> void:
-	var direction = Input.get_vector("look_left_" + str(player_id), "look_right_" + str(player_id), "look_up_" + str(player_id), "look_down_" + str(player_id))
 	var player_position = self.position
-	if direction.x == 0.0 and direction.y == 0.0:
-		direction = Input.get_vector("move_left_" + str(player_id), "move_right_" + str(player_id), "move_up_" + str(player_id), "move_down_" + str(player_id))
+	var direction = Input.get_vector("move_left_" + str(player_id), "move_right_" + str(player_id), "move_up_" + str(player_id), "move_down_" + str(player_id))
 	# This needs to be rotated 90 degrees because look_at looks to the right of the sprite by default
 	if state != States.DASHING:
 		look_at(player_position + direction.rotated(-1*(PI / 2)))
