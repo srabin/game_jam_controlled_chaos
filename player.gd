@@ -18,6 +18,8 @@ extends CharacterBody2D
 
 signal player_lost
 
+var rng = RandomNumberGenerator.new()
+
 # Player Movement
 var move_input := Vector2.ZERO
 
@@ -60,6 +62,7 @@ func take_damage(amount: int, direction, attacker) -> void:
 		velocity.x = direction.x * (1 + percentage * knockback_modifier)
 		velocity.y = direction.y * (1 + percentage * knockback_modifier)
 		animation_player.stop()
+		on_hit_sound.pitch_scale = rng.randf_range(0.8, 1.0)
 		on_hit_sound.play()
 		animation_player.play("hurt", 2)
 		
@@ -67,6 +70,7 @@ func take_damage(amount: int, direction, attacker) -> void:
 		spore_splatter.emitting= true
 	else:
 		attacker.block_stun()
+		on_block_sound.pitch_scale = rng.randf_range(0.95, 1.0)
 		on_block_sound.play()
 		animation_player.stop()
 		self._start_idle()
@@ -135,12 +139,14 @@ func _start_dash(horizontal, vertical, delta):
 	look_at(self.position + direction.rotated(-1*(PI / 2)))
 	
 	animation_player.stop()
+	dash_sound.pitch_scale = rng.randf_range(0.85, 1.0)
 	dash_sound.play()
 	animation_player.play("dash", 2, dash_animation_speed)
 		
 func _start_light_attack():
 	state = States.ATTACKING
 	animation_player.stop()
+	light_attack_sound.pitch_scale = rng.randf_range(0.9, 1.0)
 	light_attack_sound.play()
 	animation_player.play("light_attack", 2, attack_animation_speed) 
 	
