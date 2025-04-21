@@ -7,7 +7,7 @@ var fight_track: AudioStreamPlayer
 var end_track: AudioStreamPlayer
 
 func _on_fight_track_finished():
-	fight_track.play(100.063)
+	fight_track.play(59.523)
 
 func _on_title_track_finished():
 	title_track.play()

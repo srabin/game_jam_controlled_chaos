@@ -157,13 +157,18 @@ libraries = {
 &"": SubResource("AnimationLibrary_pkv5b")
 }
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 50.0
+[node name="MediumTimer" type="Timer" parent="."]
+wait_time = 33.0
 autostart = true
+ignore_time_scale = true
+
+[node name="SmallTimer" type="Timer" parent="."]
+wait_time = 26.304
 ignore_time_scale = true
 
 [node name="StageCrumble" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_l7dh2")
 pitch_scale = 2.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="MediumTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SmallTimer" to="." method="_on_timer_timeout"]
