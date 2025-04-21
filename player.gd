@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var on_hit_sound: AudioStreamPlayer2D = $OnHit
 @onready var on_block_sound: AudioStreamPlayer2D = $OnBlock
 @onready var dash_sound: AudioStreamPlayer2D = $Dash
+@onready var spore_splatter: CPUParticles2D = $SporeSplatter
 
 # @export is customizable for each player-instance
 @export var player_id : int = 0
@@ -61,6 +62,9 @@ func take_damage(amount: int, direction, attacker) -> void:
 		animation_player.stop()
 		on_hit_sound.play()
 		animation_player.play("hurt", 2)
+		
+		spore_splatter.rotation_degrees = rad_to_deg(direction.angle()) 
+		spore_splatter.emitting= true
 	else:
 		attacker.block_stun()
 		on_block_sound.play()
