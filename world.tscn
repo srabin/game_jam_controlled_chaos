@@ -141,7 +141,11 @@ theme_override_colors/font_shadow_color = Color(0.919281, 4.47616e-06, 1.15514e-
 theme_override_font_sizes/font_size = 30
 text = "Player One:"
 
-[node name="PlayerOne" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PlayerOne" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -149,7 +153,18 @@ theme = ExtResource("9_ioo17")
 theme_override_colors/font_color = Color(1, 0.819608, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
 theme_override_font_sizes/font_size = 50
-text = "0.0%"
+text = "0.0"
+
+[node name="PlayerOnePercentSign" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 0.819608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 50
+text = "%"
+vertical_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PercentageDisplay/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -165,7 +180,11 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0.635294, 1)
 theme_override_font_sizes/font_size = 30
 text = "Player Two:"
 
-[node name="PlayerTwo" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PlayerTwo" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -173,7 +192,17 @@ theme = ExtResource("9_ioo17")
 theme_override_colors/font_color = Color(0.541176, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0.635294, 1)
 theme_override_font_sizes/font_size = 50
-text = "0.0%"
+text = "0.0"
+
+[node name="PlayerTwoPercentSign" type="Label" parent="PercentageDisplay/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.541176, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.635294, 1)
+theme_override_font_sizes/font_size = 50
+text = "%"
+vertical_alignment = 2
 
 [connection signal="body_entered" from="Platform" to="Tramates" method="_on_platform_body_entered"]
 [connection signal="body_exited" from="Platform" to="Tramates" method="_on_platform_body_exited"]
