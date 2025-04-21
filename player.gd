@@ -84,7 +84,8 @@ func _ready():
 	self.player_speed = SPEED * (1.0 + (chaos*2.0/100.0))
 	self.player_dash_speed = DASH_SPEED * (1.0 + (chaos*0.5/100.0))
 	self.attack_animation_speed *= (1.0 + (chaos*0.5/100.0))
-	self.block_animation_speed *= (1.0 + (chaos*0.5/100))
+	self.block_animation_speed *= (1.0 + (chaos*0.5/100.0))
+	self.knockback_modifier *= (1.0 + (chaos*2.0/100.0))
 	
 func _process(delta: float) -> void:
 	var player_position = self.position
